@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-export const bookingSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
     uid: {
         type: Mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -41,4 +41,5 @@ export const bookingSchema = new mongoose.Schema({
 }, { timestamps: true }
 )
 
-export const bookingModel = mongoose.model("Booking", bookingSchema);
+const Booking = mongoose.model("Booking", bookingSchema);
+export default Booking; 

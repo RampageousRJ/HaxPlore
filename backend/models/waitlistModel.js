@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-export const waitlistSchema = new mongoose.Schema({
+const waitlistSchema = new mongoose.Schema({
     pendingBookings: [
         {
             type: Mongoose.Schema.Types.ObjectId,
@@ -10,4 +10,5 @@ export const waitlistSchema = new mongoose.Schema({
 }, { timestamps: true }
 )
 
-export const waitlistModel = mongoose.model("Waitlist", waitlistSchema);
+const Waitlist = mongoose.model("Waitlist", waitlistSchema);
+export default Waitlist;
