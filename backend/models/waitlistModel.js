@@ -1,9 +1,9 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const waitlistSchema = new mongoose.Schema({
     pendingBookings: [
         {
-            type: Mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Booking"
         }
     ]

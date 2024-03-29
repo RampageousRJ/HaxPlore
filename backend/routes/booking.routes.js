@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { getAllBookings, getOneBooking, newBooking, removeBooking } from "../controllers/booking.controller.js";
+import protectRoute from "../middleware/protectRoute.js";
 
 const router=Router();
 
-router.get("/getBookings",getAllBookings)
-router.get("/getOneBooking",getOneBooking)
-router.post("/newBooking",newBooking)
-router.delete("/cancelBooking",removeBooking)
+router.get("/getBookings/:id",protectRoute,getAllBookings)
+router.get("/getOneBooking/:id/:bid",protectRoute,getOneBooking)
+router.post("/newBooking/:id",protectRoute,newBooking)
+router.delete("/cancelBooking/:bid",protectRoute,removeBooking)
 
 export default router

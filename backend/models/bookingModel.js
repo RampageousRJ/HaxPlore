@@ -1,8 +1,8 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
     uid: {
-        type: Mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
@@ -24,11 +24,13 @@ const bookingSchema = new mongoose.Schema({
     },
     seniors:{
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     infants:{
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     amount:{
         type: Number,
