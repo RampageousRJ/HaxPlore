@@ -1,5 +1,5 @@
 export const signup=(req,res)=>{
-    res.json({success:true})
+    res.json({success:false})
 }
 
 export const signin=(req,res)=>{
