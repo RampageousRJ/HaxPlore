@@ -3,7 +3,7 @@ import { confirmBooking, newOrder, refundMoney } from "../controllers/payement.c
 
 const router=Router();
 
-router.post("/newOrder",newOrder)
+router.post("/create-checkout-session",newOrder)
 router.post("/confirm",confirmBooking)
 router.post("/refund",refundMoney)
 
