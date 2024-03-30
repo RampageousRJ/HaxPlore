@@ -7,13 +7,10 @@ app = Flask(__name__)
 def chat():
     payload = request.get_json(force=True)
     print(payload)
-    
     if payload['queryResult']['intent']['displayName']=='Book':    
         return book_handler(payload)
-    
     elif payload['queryResult']['intent']['displayName']=='History':    
         return history_handler(payload)
-    
     else:
         return fallback_handler(payload)
 
