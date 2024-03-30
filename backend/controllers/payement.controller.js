@@ -1,6 +1,6 @@
 
 export const newOrder=(req,res)=>{
-    res.json({success:true})
+    res.json({success:false})
 }
 
 export const confirmBooking=(req,res)=>{
