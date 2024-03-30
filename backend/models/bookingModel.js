@@ -1,8 +1,8 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-export const bookingSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
     uid: {
-        type: Mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
@@ -24,11 +24,13 @@ export const bookingSchema = new mongoose.Schema({
     },
     seniors:{
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     infants:{
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     amount:{
         type: Number,
@@ -41,4 +43,5 @@ export const bookingSchema = new mongoose.Schema({
 }, { timestamps: true }
 )
 
-export const bookingModel = mongoose.model("Booking", bookingSchema);
+const Booking = mongoose.model("Booking", bookingSchema);
+export default Booking; 
