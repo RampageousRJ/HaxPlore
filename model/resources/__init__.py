@@ -38,11 +38,32 @@ similarity = {
     }
 }
 
+architecture = [
+    "The Ram Mandir in Ayodhya is a massive Hindu temple under construction. Designed by the Sompura family, it will be 161 feet tall and built in the Māru-Gurjara architecture. The temple will have a central sanctum and five halls, with dedicated shrines for various deities. Sustainability is a focus, with 70% of the land preserved as green space. Construction avoids iron and steel, using copper plates to fuse stone blocks. Upon completion, it will be one of the world's largest Hindu temples.\n Read More: https://en.wikipedia.org/wiki/Ram_Mandir#Architecture",
+    
+    "A towering testament to faith, the Ram Mandir in Ayodhya is rising from the ground. Designed by generations of temple architects, the Sompura family, it blends tradition with modern planning. The 161-foot giant incorporates the Māru-Gurjara architectural style, known for its intricate details.  Inside, a central sanctum, the holiest space, is surrounded by five unique halls.  Respectful of the environment, the temple complex preserves most of its land as green space.  Construction itself is a marvel of craftsmanship, using copper instead of iron or steel to bind the sandstone blocks. This architectural marvel is destined to be one of the world's largest Hindu temples.\n Read More: https://en.wikipedia.org/wiki/Ram_Mandir#Architecture",
+    
+    "In the holy city of Ayodhya, a magnificent Hindu temple, the Ram Mandir, is nearing completion. Crafted by the renowned Sompura family, known for their temple designs for generations, it stands tall at 161 feet. This architectural marvel blends traditional Māru-Gurjara style with modern sensibilities.  The heart of the temple is a sacred sanctum surrounded by five distinctive halls. Sustainability is a key focus, with most of the land preserved as green space. Remarkably, the construction avoids iron and steel, using copper to join the sandstone blocks. Upon completion, this marvel will be among the world's largest Hindu temples.\n Read More: https://en.wikipedia.org/wiki/Ram_Mandir#Architecture"
+]
+
+about = [
+    "In the holy city of Ayodhya, a beacon of faith, the Ram Mandir, nears completion. The Sompura family, renowned for generations of temple design, guides its construction. This colossal Hindu temple embodies devotion.  Within its walls, a central sanctum, the holiest space, is surrounded by five unique halls, each dedicated to prayer and reflection. Sustainability is a core principle, with most of the land preserved as green space, fostering harmony with nature. The construction process itself is remarkable, using copper instead of iron or steel to bind the sandstone blocks. Upon completion, this magnificent structure will be one of the world's largest Hindu temples, a testament to enduring faith and tradition. Read More: https://en.wikipedia.org/wiki/Ram_Mandir",
+]
+
 def book_handler(payload):  
     return make_response(jsonify({'fulfillmentText':'You can view the FAQ section in our website for more information!'}))
 
 def history_handler(payload):
     result = random.choice(history)
+    return make_response(jsonify({'fulfillmentText':result}))
+
+def about_handler(payload):
+    if payload['queryResult']['parameters']['Architecture']:
+        result = random.choice(architecture)
+    elif payload['queryResult']['parameters']['Deity']:
+        result = "The Ayodhya Ram Mandir is rising to honor Lord Rama's birthplace. The main idol within the temple will depict Rama in his infant form, reflecting his status as an avatar of Vishnu.  Interestingly, a different idol installed earlier holds a special place. Placed in 1949, it was revered as 'Ram Lalla Virajman' by local devotees. This idol even played a unique role in the legal case concerning the site, being considered a legal entity. With the new main idol taking its place, Ram Lalla Virajman will now be used for special occasions and festivals. Devotees will offer prayers, hymns, and various offerings to both idols. Daily rituals will meticulously observe the traditions associated with Lord Rama's worship, ensuring a continuous cycle of devotion."   
+    else:
+        result = random.choice(about)
     return make_response(jsonify({'fulfillmentText':result}))
 
 def location_handler(payload):
@@ -58,13 +79,14 @@ def fallback_handler(payload):
     for intent in similarity:
         for query in similarity[intent]:
             similarity[intent][query] = calculate_similarity(payload['queryResult']['queryText'],query)
-            print(intent, ' -> ', similarity[intent][query])
             if highest_score<similarity[intent][query]:
                 highest_score = similarity[intent][query]
                 highest_intent = intent
-    if highest_score>0.3:
-        if highest_intent=='Booking':    
-            return book_handler(payload)
-        elif highest_intent=='History':    
-            return history_handler(payload)
-    return make_response(jsonify({'fulfillmentText':'I am sorry, I do not understand your query!'}))
+    print(highest_intent, highest_score)
+    if float(highest_score)<0.3:
+        return make_response(jsonify({'fulfillmentText':"That's an interesting question! Unfortunately, I can't understand it completely. Can you rephrase it for me, or perhaps you could ask something related to the history of temple, location, or the booking procedure?"}))
+    if highest_intent=='Booking':    
+        return book_handler(payload)
+    elif highest_intent=='History':    
+        return history_handler(payload)
+    
