@@ -3,10 +3,9 @@ import Booking from '../models/bookingModel.js'
 export const newBooking=async(req,res)=>{
     try {
         const id=req.params.id;
-        const {date,slot,attendees,seniors,infants}=req.body
+        const {date,slot,attendees,seniors,infants,isConfirmed}=req.body
         const QRCode="Generate QR"                           //Code for Qr Here
         const amount=process.env.COST*attendees;
-        const isConfirmed=false                              //Payment Code Here
         const newBooking= new Booking({
             uid:id,
             date,
@@ -21,7 +20,7 @@ export const newBooking=async(req,res)=>{
         if(newBooking){
             await newBooking.save();
             res.status(201).json({bookingId:newBooking._id,
-            status : "Payment Pending",
+            status : isConfirmed?"Slot Booked succesfully!":"Moved to Waiting list!",
             totalAmount : newBooking.amount,
             attendees,
             isConfirmed
@@ -72,6 +71,18 @@ export const getOneBooking=async(req,res)=>{
         res.status(200).json(booking)
     } catch (error) {
         console.log("Error in getOneBooking:",error.message)
+        res.status(500).json({error:"Internal Server Error!!"})
+    }
+}
+
+export const getBookedSlots=async(req,res)=>{
+    try {
+        const date=req.params.date
+        const bookings=await Booking.find({$and:[{date},{isConfirmed:true}]})                 // add .select("-QRCode") if QR is to be excluded!
+        const bookedSlots=bookings.map((booking)=>booking._id)
+        res.status(200).json({"Booked slots":bookings.length,"Booked Slots IDs":bookedSlots})
+    } catch (error) {
+        console.log("Error in getBookedSlots:",error.message)
         res.status(500).json({error:"Internal Server Error!!"})
     }
 }
