@@ -45,6 +45,13 @@ def history_handler(payload):
     result = random.choice(history)
     return make_response(jsonify({'fulfillmentText':result}))
 
+def location_handler(payload):
+    if payload['queryResult']['parameters']['location']:
+        result = "The Ayodhya Ram Mandir is located in Ayodhya, Uttar Pradesh, India. The exact address is Ayodhya, Uttar Pradesh 224123, India. You can use the following coordinates to reach the temple: 26.7925° N, 82.1944° E\n You can refer the location using https://maps.app.goo.gl/J6SV1gbMqCjgXxYC6"
+    else:
+        result = "Some of the best ways to reach the temple can be by road, rail or air. The nearest airport is the Chaudhary Charan Singh International Airport in Lucknow, which is approximately 140 km away from Ayodhya. The nearest railway station is the Ayodhya Junction, which is well-connected to major cities in India. You can also reach Ayodhya by road via the National Highways. For more information, you can visit https://tinyurl.com/travel-methods"
+    return make_response(jsonify({'fulfillmentText':result}))
+
 def fallback_handler(payload):
     highest_intent = ""
     highest_score = -5
