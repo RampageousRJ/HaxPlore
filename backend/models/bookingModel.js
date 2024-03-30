@@ -16,7 +16,6 @@ const bookingSchema = new mongoose.Schema({
     },
     QRCode: {
         type: String,
-        required: true
     },
     attendees:{
         type: Number,

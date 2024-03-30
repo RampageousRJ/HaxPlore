@@ -1,16 +1,29 @@
 import Booking from '../models/bookingModel.js'
+import generateQR from '../utils/generateQR.js';
+import qr from 'qrcode'
+import FileReader from 'filereader'
 
 export const newBooking=async(req,res)=>{
+    
+    function generateQR(data) {
+        return new Promise((resolve, reject) => {
+          qr.toDataURL(data, (err, url) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(url);
+            }
+          });
+        });
+      }
     try {
         const id=req.params.id;
         const {date,slot,attendees,seniors,infants,isConfirmed}=req.body
-        const QRCode="Generate QR"                           //Code for Qr Here
         const amount=process.env.COST*attendees;
         const newBooking= new Booking({
             uid:id,
             date,
             slot,
-            QRCode,
             attendees,
             seniors,
             infants,
@@ -19,13 +32,19 @@ export const newBooking=async(req,res)=>{
         })
         if(newBooking){
             await newBooking.save();
-            res.status(201).json({bookingId:newBooking._id,
-            status : isConfirmed?"Slot Booked succesfully!":"Moved to Waiting list!",
-            totalAmount : newBooking.amount,
-            attendees,
-            isConfirmed
-            })
-        }   
+        }
+            const QRCode=await generateQR(`http://localhost:3000/api/booking/getOneBooking/${newBooking._id}`)
+            const currentBooking=await Booking.findOneAndUpdate({_id:newBooking._id},{QRCode:QRCode},{new:true})
+            if(currentBooking){
+                await currentBooking.save();
+                res.status(201).json({bookingId:currentBooking._id,
+                status : isConfirmed?"Slot Booked succesfully!":"In Waiting list!",
+                totalAmount : newBooking.amount,
+                attendees,
+                isConfirmed,
+                QRCode:currentBooking.QRCode
+                })
+            }  
         else{
             res.status(400).json({error:"Invalid Booking data"})
         }
