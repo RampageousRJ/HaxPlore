@@ -1,7 +1,5 @@
 import Booking from '../models/bookingModel.js'
-import generateQR from '../utils/generateQR.js';
 import qr from 'qrcode'
-import FileReader from 'filereader'
 
 export const newBooking=async(req,res)=>{
     
