@@ -11,6 +11,10 @@ def chat():
         return book_handler(payload)
     elif payload['queryResult']['intent']['displayName']=='History':    
         return history_handler(payload)
+    elif payload['queryResult']['intent']['displayName']=='Location':
+        return location_handler(payload)
+    elif payload['queryResult']['intent']['displayName']=='About':
+        return about_handler(payload)
     else:
         return fallback_handler(payload)
 
