@@ -7,7 +7,7 @@ import {
   signInFailure,
   signInStart,
   signInSuccess,
-} from "../features/user/userSlice.js";
+} from "../features/userSlice.js";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
