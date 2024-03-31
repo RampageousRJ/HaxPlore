@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/app": {
-      "runtime": "vercel-python"
-    }
-  }
-}
