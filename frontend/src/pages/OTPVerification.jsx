@@ -2,7 +2,7 @@ import { Alert, TextField, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-function ForgotPassword() {
+function OTPVerification() {
   const [formData, setFormData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -12,50 +12,39 @@ function ForgotPassword() {
   };
 
   useEffect(() => {
-    setError(false);
+    setError(null);
     setLoading(false);
     setFormData(null);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
-    if (formData.newPassword !== formData.confirmPassword)
-      return setError("Passwords do not match");
+    if (formData.OTP !== "Chutiya".toLocaleLowerCase())
+      return setError("Invalid OTP");
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
       <motion.form
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.8 }}
         onSubmit={handleSubmit}
-        className="flex min-h-96 w-96 shadow-2xl p-12 rounded-2xl flex-col justify-around items-center gap-8"
+        className="flex max-h-96 w-96 shadow-2xl p-12 rounded-2xl flex-col items-center gap-8"
       >
-        <h1 className="text-2xl text-orange-700 font-bold uppercase">
-          Password Reset
+        <h1 className="text-2xl text-blue-400 font-bold uppercase">
+          Verify OTP
         </h1>
+        <i>Enter the code sent to your email</i>
         <TextField
+          variant="standard"
           size="small"
-          placeholder="Enter new password.."
-          label="New Password"
-          name="newPassword"
-          id="newPassword"
+          placeholder="Enter OTP..."
+          name="OTP"
+          id="OTP"
           required
-          color="warning"
-          className="w-full"
-          onChange={handleChange}
-        />
-        <TextField
-          size="small"
-          label="Confirm New Password"
-          placeholder="Confirm new password.."
-          name="confirmPassword"
-          id="confirmPassword"
-          required
-          color="warning"
+          color="primary"
           className="w-full"
           onChange={handleChange}
         />
@@ -63,8 +52,8 @@ function ForgotPassword() {
           variant="contained"
           isLoading={loading}
           type="submit"
-          name="reset-btn"
-          color="warning"
+          name="otp-btn"
+          color="primary"
           fullWidth={true}
         >
           Reset Password
@@ -75,4 +64,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default OTPVerification;

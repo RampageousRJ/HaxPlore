@@ -82,7 +82,7 @@ function Booking() {
       </div>
       <section
         id="date-section"
-        className=" py-4 flex justify-center items-center"
+        className=" py-4 flex justify-center items-center overflow-x-scroll"
       >
         <div className="w-1/4 flex gap-4 items-center justify-center">
           <IoIosArrowBack
