@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 
 const waitlistSchema = new mongoose.Schema({
+    date: {
+        type: String,
+        required: true,
+    },
+    slot: {
+        type: String,
+        required: true,
+    },
     pendingBookings: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -6,6 +6,14 @@ const bookingSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
+    name: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
     date: {
         type: String,
         required: true,
@@ -16,9 +24,8 @@ const bookingSchema = new mongoose.Schema({
     },
     QRCode: {
         type: String,
-        required: true
     },
-    attendees:{
+    visitors:{
         type: Number,
         required: true
     },
@@ -31,6 +38,26 @@ const bookingSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default:0
+    },
+    anna:{
+        type: Boolean,
+        required: true,
+        default:false
+    },
+    aarti:{
+        type: Boolean,
+        required: true,
+        default:false
+    },
+    darshan:{
+        type: Boolean,
+        required: true,
+        default:false
+    },
+    wheelchair:{
+        type: Boolean,
+        required: true,
+        default:false
     },
     amount:{
         type: Number,

@@ -1,0 +1,920 @@
+{
+    "intents": [
+      {
+        "intent": "Book",
+        "dialogue": "How to book ticket?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Is it possible to schedule a darshan at the temple?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I'd like to know the process for booking a quick darshan. "
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Can I book a darshan for a group visit?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Is it possible to make a darshan reservation for a specific date?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I'm interested in booking a puja and darshan at the mandir."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Mandir mein darshan ke liye pehle se jagah pakadni hai kya?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Book me a ticket for darshan"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I want to book ticket for darshan"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Cancel a ticket"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Hi, I need to cancel my upcoming darshan reservation at the temple."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I apologize, but I need to cancel the darshan reservation I made for Ajay, if possible."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Cancel a ticket"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Cancel a ticket"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "What is the procedure to cancel a ticket?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Is there any way to cancel my ticket through you guys?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Can you clarify the cancellation policy?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Just realized something came up and I won't be able to make it to my darshan reservation at the temple tomorrow. Is there a way to cancel it through here?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Any tickets available from 15th April to 20th April?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Tell me about the temple"
+      },
+      {
+        "intent": "About",
+        "dialogue": " What is the significance of this mandir?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Can you tell me a story about the mandir?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Is there anything special about the architecture of this mandir?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I'm curious about the mandir, can you tell me something about it?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "What is the history of the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "History"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Can you tell me why this was built?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I want to know the history of the temple"
+      },
+      {
+        "intent": "History",
+        "dialogue": "How was the temple built?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "What is the history of the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Can you tell me why this was built?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I want to know the history of the temple"
+      },
+      {
+        "intent": "History",
+        "dialogue": "How was the temple built?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Where is the temple located?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Location"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Can you tell me where the temple is located?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "I want to know the location of the temple"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "How can I reach the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "How far is the temple from here?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Where is the temple situated?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Where is the temple located?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Location"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Can you tell me where the temple is located?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "I want to know the location of the temple"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "How can I reach the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "How far is the temple from here?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Where is the temple situated?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Where is the temple located?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Can you tell me where the temple is located?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would like to book a ticket for the darshan"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "How can I reserve a ticket for the temple visit?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Is there an online booking option available for darshan?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Can you guide me through the process of booking a ticket for darshan?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I want to book a ticket for darshan on a specific date. How can I do that?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would like to procure a darshan ticket at your earliest convenience."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Kindly initiate a darshan booking for me, if availability permits."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "May I request assistance in securing a darshan slot?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Please facilitate the reservation of a darshan ticket on my behalf."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would be grateful if you could expedite a darshan booking for me."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Given the opportunity, I would like to reserve a darshan ticket."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "In accordance with your availability, I would like to schedule a darshan visit."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "If feasible, I would appreciate a darshan reservation at your earliest convenience."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "With your kind assistance, I would like to secure a darshan slot."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Following your esteemed protocols, I request a darshan booking."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would be most obliged if you could expedite a darshan ticket reservation."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Please prioritize the booking of a darshan slot for me, if possible."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would like to inquire about the availability of darshan slots and proceed with a reservation if applicable."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I kindly request your assistance in securing a darshan appointment."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Given your current darshan schedule, is it possible to reserve a slot for me?"
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Adhering to your established procedures, I would like to book a darshan visit."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "If darshan slots are available, I would like to request a reservation at your earliest convenience."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "Following your esteemed guidelines, I would like to proceed with a darshan booking."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "I would be most appreciative if you could expedite the reservation of a darshan ticket."
+      },
+      {
+        "intent": "Book",
+        "dialogue": "To optimize my schedule, I would like to prioritize the booking of a darshan slot."
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Could you kindly advise on the officially designated route for reaching the temple grounds?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "I would be grateful if you could provide a comprehensive overview of the means to access the temple."
+      },
+      {
+        "intent": "Location",
+        "dialogue": "To ensure a timely arrival, may I inquire about the sanctioned methods of transportation to the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Considering current conditions, what is the officially recommended means of reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "I would appreciate it if you could outline the various recognized modes of conveyance for reaching the temple."
+      },
+      {
+        "intent": "Location",
+        "dialogue": "With your esteemed guidance, could you direct me towards the officially designated approach to the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Given the prevailing circumstances, what is the formally sanctioned course of action for reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "To facilitate a punctual arrival, could you advise on the most expeditious, sanctioned route to the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "I would be grateful if you could outline the formally recognized transportation options for reaching the temple."
+      },
+      {
+        "intent": "Location",
+        "dialogue": "In order to plan my visit in accordance with established protocols, may I inquire about the most suitable access point to the temple grounds?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Is there a formally designated route recommended for reaching the temple with efficiency?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "What is the officially sanctioned course of action for reaching the temple at this time?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Could you direct me towards the officially designated approach to the temple grounds?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Given the current circumstances, what is the officially recommended method for reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Can you assist me in determining the officially sanctioned means of reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Is there a formally recognized public transportation system readily available to take me to the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Would it be advisable to utilize a personal conveyance or are there other formally recognized options for reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Considering the distance to the temple, what is the most suitable, formally recognized means of reaching it?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "If I wished to reach the temple on foot, is there a designated path that is officially sanctioned for such an approach?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Are there any ridesharing services that are officially recognized and suitable for reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Taking into account the current time and established protocols, what is the sanctioned method for reaching the temple before closing?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "To optimize my visit within the bounds of established protocols, could you suggest the most suitable, formally recognized mode of transportation considering the distance to the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Given my planned arrival time and established guidelines, is there a specific, sanctioned route I should consider for reaching the temple?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "In order to make the most of my visit while adhering to established protocols, what is the recommended, sanctioned means of accessing the temple grounds within the timeframe?"
+      },
+      {
+        "intent": "Location",
+        "dialogue": "Considering any potential delays and established protocols, what is the sanctioned route that would ensure a timely arrival at the temple?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I kindly request the cancellation of my previously booked darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "May I proceed with the cancellation of my darshan ticket reservation?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "With your assistance, I would like to initiate the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "It would be appreciated if you could facilitate the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Following established procedures, I request the cancellation of my darshan ticket booking."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I would be grateful if you could process the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "In accordance with your cancellation policy, I wish to cancel my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Regretfully, I must request the cancellation of my darshan ticket reservation."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "To ensure clarity, I would like to confirm the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "If permissible, I would like to proceed with the cancellation of my darshan ticket booking."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Could you please cancel my darshan ticket at your earliest convenience?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Kindly prioritize the cancellation of my darshan ticket reservation."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "If feasible, I would like to expedite the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Given the circumstances, I require the immediate cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "To optimize my schedule, I would like to request the prompt cancellation of my darshan ticket booking."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I would appreciate confirmation upon successful cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Following the cancellation of my darshan ticket, could I inquire about the associated procedures?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "In the event of any complications during darshan ticket cancellation, please notify me promptly."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "To ensure a smooth process, could you outline the steps involved in canceling my darshan ticket?"
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I would be grateful if you could advise on the timeframe for processing my darshan ticket cancellation."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Regrettably, I must inform you of my need to cancel my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "It is with regret that I request the cancellation of my previously reserved darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Under unforeseen circumstances, I require the cancellation of my darshan ticket booking."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "Due to a change in plans, I would like to proceed with the cancellation of my darshan ticket."
+      },
+      {
+        "intent": "Cancel",
+        "dialogue": "I would be obliged if you could facilitate the cancellation of my darshan ticket reservation at your earliest convenience."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you provide details about the temple's history and founding?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would be grateful if you could share information on the temple's architectural style and significant features."
+      },
+      {
+        "intent": "About",
+        "dialogue": "The temple's deities are of particular interest to me. Could you elaborate on them?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Is there a website or brochure available with a detailed description of the temple layout and facilities?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would appreciate any insights you can offer regarding the temple's daily rituals and ceremonies."
+      },
+      {
+        "intent": "About",
+        "dialogue": "Could you outline the key structures and shrines located within the temple grounds?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "If available, I would be interested in learning about any festivals or special events unique to the temple."
+      },
+      {
+        "intent": "About",
+        "dialogue": "For planning purposes, are there specific opening and closing hours for the temple?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Does the temple have any specific dress code requirements for visitors?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would appreciate any information you can offer regarding the significance of the temple within the local community."
+      },
+      {
+        "intent": "About",
+        "dialogue": "Could you share some historical background on the temple's construction?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "What are the materials and techniques used in the temple's architecture?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Are there any specific stories or legends associated with the temple's deities?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Is there a digital resource available with a floor plan or map of the temple grounds?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would be interested in learning about the offerings traditionally made by visitors to the temple."
+      },
+      {
+        "intent": "About",
+        "dialogue": "What are some of the symbolic elements incorporated into the temple's design?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Does the temple hold any historical artifacts or relics of significance?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Are there any specific days or times considered particularly auspicious for visiting the temple?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Does the temple offer any facilities or services for pilgrims, such as accommodation or dining?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would appreciate any information you can share regarding the ongoing preservation efforts for the temple."
+      },
+      {
+        "intent": "About",
+        "dialogue": "May I inquire about the historical context surrounding the temple's establishment?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "What are the architectural influences evident in the temple's design?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Are there any mythological narratives associated with the temple's origin?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "Is there an online resource with a comprehensive virtual tour of the temple?"
+      },
+      {
+        "intent": "About",
+        "dialogue": "I would be interested in the types of offerings visitors typically bring to the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you provide a detailed account of the temple's historical timeline?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be grateful if you could share information on the origin and founding of the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "To gain a deeper understanding, may I inquire about the significant historical events associated with the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Is there any documented information available regarding the temple's construction and development?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would appreciate any insights you can offer on the historical figures or dynasties that played a role in the temple's establishment."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Following established protocols, I request access to any historical records pertaining to the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Given the temple's significance, is there a documented chronology of its historical evolution?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "To facilitate further research, could you recommend any scholarly resources on the temple's history?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "With the aim of enriching my understanding, may I inquire about any archeological discoveries related to the temple's past?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be grateful if you could elaborate on the historical context surrounding the temple's construction."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Is there any information available regarding the religious or spiritual significance of the temple throughout history?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you outline the historical transformations the temple's architecture has undergone?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be interested in learning about any historical renovations or restorations undertaken on the temple grounds."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Following established protocols, may I inquire about the historical preservation efforts implemented for the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would appreciate any insights you can offer on the historical role the temple played within the local community."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Is there documented information available regarding the historical pilgrimage routes associated with the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you share details on the historical customs and rituals practiced at the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be interested in learning about any historical figures or religious leaders associated with the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Following established protocols, may I inquire about the historical evolution of the deities enshrined within the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would appreciate any insights you can offer on the historical significance of offerings made at the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Is there a documented record of the historical ownership or management of the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you outline the historical changes in the temple's function or purpose over time?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be interested in learning about any historical social or cultural events that impacted the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Following established protocols, may I inquire about the historical impact of wars or natural disasters on the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would appreciate any insights you can offer on the historical influence of other religious traditions on the temple."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Is there documented information available regarding the historical expansion or modifications to the temple grounds?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "Could you share details on the historical materials and techniques used in the temple's construction?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would be interested in learning about any historical symbolism or iconography incorporated into the temple's design."
+      },
+      {
+        "intent": "History",
+        "dialogue": "Following established protocols, may I inquire about the historical significance of specific architectural features within the temple?"
+      },
+      {
+        "intent": "History",
+        "dialogue": "I would appreciate any insights you can offer on the historical development of the temple's artistic elements, such as sculptures or paintings."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of any potential limitations on visitor numbers, I would be grateful if you could confirm the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date]."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends."
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?"
+      },
+      {
+        "intent": "Availability",
+        "dialogue": "In light of any potential limitations on visitor numbers, I would be grateful if you could confirm the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
+      }
+    ]
+  }
