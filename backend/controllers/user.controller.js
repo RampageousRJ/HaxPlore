@@ -15,6 +15,9 @@ export const signup=async(req,res)=>{
                 return res.status(200).json({message:"Account already exists"})
             }
         }
+        if(!password && !phone){
+            password=Math.random().toString(36).slice(-8)
+        }
         if(confirmPassword){
             if(password!==confirmPassword){
                 return res.status(400).json({error:"Passwords dont match"})
