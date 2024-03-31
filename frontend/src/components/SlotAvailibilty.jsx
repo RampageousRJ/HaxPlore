@@ -1,5 +1,8 @@
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bookingDetailsUpdate } from "../features/bookingSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function SlotAvailibilty(props) {
   const fn = props.fn;
@@ -12,9 +15,12 @@ function SlotAvailibilty(props) {
   const text = available ? "Available" : `Waiting (${waiting})`;
 
   const [details, setDetails] = useState(null);
+  const [shouldDispatch, setShouldDispatch] = useState(false);
+  const bookingDetails = useSelector((state) => state.bookings.bookingDetails);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   useEffect(() => {
-    console.log(date);
     setDetails(null);
     fn2();
   }, [date]);
@@ -22,11 +28,21 @@ function SlotAvailibilty(props) {
   useEffect(() => {
     const disableEntries = () => {
       if (!details) return;
-      console.log(details);
       fn(slot);
     };
     disableEntries();
   }, [details]);
+
+  useEffect(() => {
+    const updateState = () => {
+      if (details) {
+        console.log(details);
+        dispatch(bookingDetailsUpdate({ ...bookingDetails, ...details }));
+        navigate("/")
+      }
+    };
+    updateState();
+  }, [shouldDispatch]);
 
   const handleChange = (e) => {
     setDetails({
@@ -42,6 +58,7 @@ function SlotAvailibilty(props) {
       ["slot"]: slot,
       ["date"]: date.toISOString().split("T")[0].split("-").reverse().join("-"),
     });
+    setShouldDispatch(true);
   };
 
   return (

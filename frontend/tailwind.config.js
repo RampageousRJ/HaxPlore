@@ -16,7 +16,8 @@ export default {
         "arrow": "#C0BFBF",
         "main-btn": "#FD9B6C",
         "main-light-orange": "#FFF3E3",
-        "orange-form-bg":"#FFF4E5"
+        "orange-form-bg": "#FFF4E5",
+        "ticket-orange": "#FF8900"
       },
       colors: {
         "available": "#34C90E",
@@ -28,6 +29,8 @@ export default {
         "main-form-text": "#BB3B3B",
         'custom-orange': '#E54717',
         'custom-yellow': '#F1AB3C',
+        "ticket-orange": "#FF8900",
+        "gray-checkout": "#6E6C6C",
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(to bottom, #E54717, #F57A42 25%, #F1AB3C 50%, #FBD38D 75%)',

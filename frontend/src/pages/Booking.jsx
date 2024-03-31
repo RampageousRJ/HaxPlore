@@ -4,10 +4,14 @@ import bookingSvg from "../assets/White Minimalist Simple Aesthetic Name Twitter
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import SlotAvailibilty from "../components/SlotAvailibilty";
+import { useDispatch, useSelector } from "react-redux";
 
 function Booking() {
   const [dates, setDates] = useState(null);
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const currDate = useSelector((state) => state.bookings.bookingDetails.date);
+  const number=useSelector((state)=>state.bookings.bookingDetails.visitors);
 
   const [slots, setSlots] = useState([
     {
@@ -18,7 +22,7 @@ function Booking() {
     },
     {
       slot: "9:00-10:00",
-      available: 10,
+      available: 12,
       waiting: 0,
       isDisabled: false,
     },
@@ -31,12 +35,11 @@ function Booking() {
   ]);
 
   useEffect(() => {
-    const generateDates = (currDate = "30-06-2023") => {
+    const generateDates = () => {
       // Convert DD-MM-YYYY to YYYY-MM-DD
       setLoading(true)
       const [day, month, year] = currDate.split("-");
       const formattedDate = `${year}-${month}-${day}`;
-
       const date = new Date(formattedDate);
       const nextDate = new Date(date.getTime());
       nextDate.setDate(date.getDate() + 1);
@@ -47,15 +50,15 @@ function Booking() {
       const prev2Date = new Date(date.getTime());
       prev2Date.setDate(date.getDate() - 2);
       setDates([prev2Date, prevDate, date, nextDate, next2Date]);
-      setLoading(false)
+      setLoading(false);
     };
     generateDates();
-  }, []);
+  }, [currDate]);
 
   const [active, setActive] = useState(2);
 
   const decreaseDate = (e) => {
-    setLoading(true)
+    setLoading(true);
     const currDates = [...dates];
     const temp = new Date(currDates.at(0));
     const prevDate = new Date(temp.getTime());
@@ -63,11 +66,11 @@ function Booking() {
     currDates.pop();
     currDates.unshift(prevDate);
     setDates(currDates);
-    setLoading(false)
+    setLoading(false);
   };
 
   const increaseDate = (e) => {
-    setLoading(true)
+    setLoading(true);
     const currDates = [...dates];
     const temp = new Date(currDates.at(currDates.length - 1));
     const prevDate = new Date(temp.getTime());
@@ -75,7 +78,7 @@ function Booking() {
     currDates.shift();
     currDates.push(prevDate);
     setDates(currDates);
-    setLoading(false)
+    setLoading(false);
   };
 
   // Function to make not selected items disabled
@@ -92,7 +95,7 @@ function Booking() {
   // Function to clear disabled feature for all
   const fn2 = () => {
     const tempSlots = [...slots];
-    tempSlots.map((item) => item.isDisabled = false);
+    tempSlots.map((item) => (item.isDisabled = false));
     setSlots(tempSlots);
   };
 
@@ -175,7 +178,6 @@ function Booking() {
           <section className="py-4 flex ">
             <div className=" mx-auto flex flex-col gap-2 px-10">
               {slots.map((item, ind) => {
-                const number = 20;
                 let isAvailable = false;
                 if (item.available - number >= 0) isAvailable = true;
                 return (

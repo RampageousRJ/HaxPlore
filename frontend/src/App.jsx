@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import Bookings from "./pages/Bookings";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/allBookings" element={<Bookings />} />
         <Route path="/otpVerification" element={<OTPVerification />} />
         <Route path="/resetPassword" element={<ForgotPassword />} />
+        <Route path="/payementDetails" element={<PaymentConfirmation />} />
       </Routes>
     </Router>
   );

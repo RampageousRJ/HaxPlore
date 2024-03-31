@@ -1,9 +1,12 @@
 import { TextField, ThemeProvider, createTheme } from "@mui/material";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bookingDetailsUpdate } from "../features/bookingSlice.js";
 
 function BookingForm() {
   const [formData, setFormData] = useState(null);
+  const dispatch = useDispatch();
 
   const theme = createTheme({
     components: {
@@ -25,7 +28,11 @@ function BookingForm() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    dispatch(bookingDetailsUpdate(formData));
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -39,6 +46,7 @@ function BookingForm() {
             id="name"
             name="name"
             placeholder="Name"
+            required
             value={formData?.name || ""}
             onChange={handleChange}
           />
@@ -50,6 +58,7 @@ function BookingForm() {
             type="number"
             placeholder="Phone Number"
             value={formData?.phone || ""}
+            required
             onChange={handleChange}
           />
           <TextField
@@ -60,6 +69,7 @@ function BookingForm() {
             type="number"
             placeholder="No. of Visitors"
             value={formData?.visitors || ""}
+            required
             onChange={handleChange}
           />
           <TextField
@@ -70,6 +80,7 @@ function BookingForm() {
             type="number"
             placeholder="No. Children Below 12"
             value={formData?.children || ""}
+            required
             onChange={handleChange}
           />
           <TextField
@@ -80,6 +91,7 @@ function BookingForm() {
             type="number"
             placeholder="No. of Senior Citizens"
             value={formData?.senior || ""}
+            required
             onChange={handleChange}
           />
           <TextField
@@ -90,11 +102,13 @@ function BookingForm() {
             type="date"
             placeholder="Date"
             value={formData?.date || ""}
+            required
             onChange={handleChange}
           />
         </ThemeProvider>
       </div>
       <Button
+        type="submit"
         variant="shadow"
         className="mx-auto bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg text-xl py-6 px-8"
       >
