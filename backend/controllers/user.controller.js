@@ -11,7 +11,12 @@ export const signup=async(req,res)=>{
         const userEmail=await User.findOne({email})
         const userPhone=await User.findOne({phone})
         if(userEmail || userPhone){
-            return res.status(400).json({error:"Account already exists"})
+            if(userEmail){
+                genTokenAndSetCookie(userEmail._id,res)
+                return res.status(200).json({message:"Account already exists",userEmail})
+            }else{
+                return res.status(200).json({message:"Account already exists"})
+            }
         }
         
         //HASH password here

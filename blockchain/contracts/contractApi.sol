@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract contractApi {
     struct Record {
         uint256 bookingId;
-        uint256 transactionId;
+        string transactionId;
     }
     address owner;
 
@@ -22,13 +22,13 @@ contract contractApi {
         _;
     }
 
-    function setRecord (uint256 _bookingId,uint256 _transactionId) public onlyOwner {
+    function setRecord (uint256 _bookingId,string memory _transactionId) public onlyOwner {
         Record memory record = Record(_bookingId, _transactionId);
         records[_bookingId] = record; 
         RecordArray.push(Record(_bookingId, _transactionId));
     }
 
-    function getRecord (uint256 _bookingId) public view returns (uint256) {
+    function getRecord (uint256 _bookingId) public view returns (string memory) {
         require(records[_bookingId].bookingId !=0 , "Record is not available");
         Record memory record = records[_bookingId];
         return (record.transactionId);

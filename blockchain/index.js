@@ -17,7 +17,7 @@ const getOneRecord=async(req, res) => {   //http://localhost:3000/records/1
     try {
         const bookingId = req.params.id;
         const record = await contractInstance.getRecord(bookingId);
-        res.status(200).json({"transactionId":parseInt(record)});
+        res.status(200).json({"transactionId":record});
     }
     catch (error) {
         res.status(500).json({"Error":error.message});
