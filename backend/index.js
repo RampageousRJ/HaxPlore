@@ -6,6 +6,7 @@ import authRoutes from './routes/user.route.js'
 import bookingRoutes from './routes/booking.routes.js'
 import paymentRoutes from './routes/payement.routes.js'
 import verifyRoutes from './routes/verify.routes.js'
+import securityRoutes from './routes/security.routes.js'
 import connectToMongoDb from "./db/connectToMongoDb.js";
 
 
@@ -24,6 +25,7 @@ app.use(cors({
 app.use("/api/auth",authRoutes)
 app.use("/api/booking",bookingRoutes)
 app.use("/api/payment",paymentRoutes)
+app.use("/api/security",securityRoutes)
 app.use("/api/forgot-password",verifyRoutes)
 
 app.listen(3000,()=>{
