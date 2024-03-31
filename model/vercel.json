@@ -1,8 +1,7 @@
 {
-    "functions": {
-      "api/app": {
-        "runtime": "python3.8"
-      }
+  "functions": {
+    "api/app": {
+      "runtime": "vercel-python"
     }
   }
-  
+}

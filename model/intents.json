@@ -718,99 +718,99 @@
       },
       {
         "intent": "Availability",
-        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?\n"
+        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks.\n"
+        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks."
       },
       {
         "intent": "Availability",
-        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?\n"
+        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?\n"
+        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date].\n"
+        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?\n"
+        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date].\n"
+        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?\n"
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?\n"
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date].\n"
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?\n"
+        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?\n"
+        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?\n"
+        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name].\n"
+        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?\n"
+        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?\n"
+        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date].\n"
+        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?\n"
+        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?\n"
+        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date].\n"
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?\n"
+        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends.\n"
+        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends."
       },
       {
         "intent": "Availability",
-        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?\n"
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?\n"
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
@@ -818,99 +818,99 @@
       },
       {
         "intent": "Availability",
-        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?\n"
+        "dialogue": "With respect to darshan availability, could you kindly inquire about potential openings for the week of [Start Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks.\n"
+        "dialogue": "Following established protocols, I would like to formally request confirmation on darshan ticket availability for a date within the next two weeks."
       },
       {
         "intent": "Availability",
-        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?\n"
+        "dialogue": "To facilitate my visit, may I inquire about the possibility of securing darshan reservations for any date between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?\n"
+        "dialogue": "At your earliest convenience, could you confirm the availability of darshan tickets for a specific date within the upcoming month, falling between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date].\n"
+        "dialogue": "Given my planned visit in the near future, I would be grateful if you could verify the existence of darshan slots during the timeframe of [Start Date] to [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?\n"
+        "dialogue": "Considering the current date, could you advise on the potential for darshan bookings during the upcoming [holiday name] weekend, specifically from [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date].\n"
+        "dialogue": "In adherence to established procedures, I would like to formally inquire about the availability of darshan reservations for any date within the next [number] days, starting from [Start Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?\n"
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date] (one month window)?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?\n"
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming quarter, falling between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date].\n"
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of darshan slots during a specific timeframe, ideally between [Start Date] and [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?\n"
+        "dialogue": "Particularly interested in visiting during a full moon, could you confirm the availability of darshan tickets for the date closest to the upcoming full moon?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?\n"
+        "dialogue": "With a preference for a weekday visit, could you inquire about the possibility of securing a darshan reservation on a non-holiday date within the next [number] weeks?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?\n"
+        "dialogue": "Given my schedule limitations, could you advise on the availability of darshan slots during the mornings or evenings within the timeframe of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name].\n"
+        "dialogue": "If possible, I would like to inquire about the availability of darshan tickets for a date closest to the upcoming [festival name]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?\n"
+        "dialogue": "Considering my travel plans, could you confirm the existence of darshan slots on any date within the next [number] months, starting from [Start Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?\n"
+        "dialogue": "To ensure a smooth visit, could you inquire about darshan availability for the upcoming weekend, specifically from [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date].\n"
+        "dialogue": "Following established protocols, I would like to formally request a confirmation on darshan reservations for any date within the next quarter, falling between [Start Date] and [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?\n"
+        "dialogue": "In order to finalize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for a specific date within the next two months, ideally between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?\n"
+        "dialogue": "With the intention of attending a special ceremony, could you please verify the availability of darshan slots for a date closest to the upcoming [ceremony name]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date].\n"
+        "dialogue": "In light of my upcoming visit, I would be grateful if you could confirm the existence of afternoon darshan slots during the timeframe of [Start Date] to [End Date]."
       },
       {
         "intent": "Availability",
-        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?\n"
+        "dialogue": "Considering any upcoming religious holidays, could you advise on the potential for darshan bookings during the period of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends.\n"
+        "dialogue": "Following established procedures, I would like to formally inquire about the availability of darshan reservations for a date within the next [number] days, with a preference for the weekends."
       },
       {
         "intent": "Availability",
-        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?\n"
+        "dialogue": "To optimize my travel arrangements, may I request confirmation on the possibility of securing darshan tickets for any date falling within the window of [Start Date] to [End Date]?"
       },
       {
         "intent": "Availability",
-        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?\n"
+        "dialogue": "With the intention of finalizing my itinerary, could you please verify the availability of darshan slots for a specific date within the upcoming six months, ideally between [Start Date] and [End Date]?"
       },
       {
         "intent": "Availability",
