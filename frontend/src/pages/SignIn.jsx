@@ -33,13 +33,13 @@ function SignIn() {
         body: JSON.stringify(formData), // HTTP only handles text data
       });
       const data = await req.json();
-      if (data.success === false) {
-        return dispatch(signInFailure(data.message));
-      } else {
-        console.log(data.sendInfo);
-        dispatch(signInSuccess(data.sendInfo));
+      if (data.error) {
+        return dispatch(signInFailure(data.error));
+      } 
+      else {
+        dispatch(signInSuccess(data.userEmail));
         setFormData(null);
-        navigate("/home");
+        navigate("/");
         return;
       }
     } catch (e) {
@@ -71,6 +71,7 @@ function SignIn() {
           </h1>
           <TextField
             id="email"
+            name="email"
             label="Email"
             type="email"
             autoComplete="current-email"
@@ -86,6 +87,7 @@ function SignIn() {
           <TextField
             id="password"
             label="Password"
+            name="password"
             type="password"
             autoComplete="current-password"
             variant="standard"

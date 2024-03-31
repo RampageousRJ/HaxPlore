@@ -1,11 +1,43 @@
 import React from "react";
 import Ticket from "../components/Ticket";
 import bookingSvg from "../assets/White Minimalist Simple Aesthetic Name Twitter Header-4 1.svg";
-import payButton from "../assets/Rectangle 8button.svg";
 import { Button } from "@nextui-org/react";
+import { loadStripe } from "@stripe/stripe-js";
 
 function PaymentConfirmation() {
-  const handleClick = (e) => {};
+  const handleClick = async (e) => {
+    const items = [
+      {
+        name: "bill",
+        price: 11150,
+        qnty: 1,
+      },
+    ];
+    {
+      /* import.meta.env.STRIPE_PUBLISHABLE_KEY */
+    }
+    const stripe = await loadStripe(
+      "pk_test_51OzkIrSDUKDjRLRHQYHYyVY6t2XwGI82VMIMiewZjDUErzCuIYOoZXkoSerqvbxsDoJkDgSfZoS7UoNCze3Ut2ZO00bFdwLV18"
+    );
+    const req = await fetch(
+      "http://localhost:3000/api/payment/create-checkout-session",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(items),
+      }
+    );
+    const session = await req.json();
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
+  };
 
   return (
     <div className="flex flex-col">

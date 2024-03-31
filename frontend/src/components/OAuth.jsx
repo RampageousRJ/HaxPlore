@@ -36,6 +36,7 @@ function OAuth() {
     try {
       dispatch(signInStart());
       const result = await signInWithPopup(auth, provider);
+      console.log(result);
       // Submit data for database
       try {
         const res = await fetch("/api/v1/google", {
@@ -46,7 +47,6 @@ function OAuth() {
           body: JSON.stringify({
             email: result.user.email,
             name: result.user.displayName,
-            image: result.user.photoURL,
           }),
         });
         const data = await res.json();

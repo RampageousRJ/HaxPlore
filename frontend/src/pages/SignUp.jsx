@@ -30,8 +30,8 @@ function SignUp() {
         body: JSON.stringify(formData), // HTTP only handles text data
       });
       const data = await req.json();
-      if (data.success == false)
-        return setFailure("Error in signup. Try Again later!!");
+      if (data.error)
+        return setFailure(data.error);
     } catch (e) {
       setFailure(e);
     }
@@ -43,8 +43,7 @@ function SignUp() {
   const handleChange = (e) => {
     const input = e.target.id || e.target.name;
     const val = e.target.value.trim(); //.trim() to get rid of useless white spaces at start
-    const temp = { ...formData, [input]: val }; // Make sure u are using an object and not an
-    // array else it will append instead of overwriting
+    const temp = { ...formData, [input]: val };
     setFormData(temp);
   };
 
@@ -63,16 +62,16 @@ function SignUp() {
             REGISTER
           </h1>
           <TextField
-            id="username"
-            label="Username"
-            type="username"
-            autoComplete="current-username"
+            id="name"
+            label="Name"
+            type="name"
+            autoComplete="current-name"
             variant="standard"
             color="warning"
             sx={{
               width: "300px",
             }}
-            value={formData.username}
+            value={formData?.name || ''}
             required
             onChange={handleChange}
           />
