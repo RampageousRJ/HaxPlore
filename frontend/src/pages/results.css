@@ -1,0 +1,52 @@
+/* General table styles for consistency and readability */
+table {
+  border-collapse: collapse; /* Removes space between borders */
+  width: 100%; /* Ensures the table fills its container */
+  text-align: left; /* Aligns text to the left for readability */
+}
+
+/* Header styles */
+th {
+  background-color: #38b2ac;
+  color: #ffffff;
+  border: 2px solid #2c7a7b;
+  padding: 10px 20px;
+  text-align: left; /* Ensures consistency in text alignment */
+}
+
+/* Cell styles */
+td {
+  padding: 10px 20px; /* Increase padding for better spacing */
+  border-bottom: 1px solid #2c7a7b; /* Adds a subtle border to each row for separation */
+}
+
+/* Row styling for hover effect */
+tr:hover {
+  background-color: #e0f2f1; /* A light teal shade for hover, enhancing interactivity */
+}
+
+/* Zebra striping for rows */
+tbody tr:nth-child(odd) {
+  background-color: #f0fdfa; /* A very light teal, for every other row */
+}
+
+/* First column emphasis */
+td:first-child {
+  font-weight: bold; /* Makes the first column (UserName) more prominent */
+}
+
+/* Adjustments for mobile responsiveness (optional) */
+@media (max-width: 768px) {
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+  tr {
+    margin-bottom: 10px;
+    display: block;
+  }
+  thead {
+    display: none; /* Hides the header row on smaller screens for simplicity */
+  }
+}

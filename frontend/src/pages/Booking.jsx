@@ -11,33 +11,14 @@ function Booking() {
   const [loading, setLoading] = useState(false);
 
   const currDate = useSelector((state) => state.bookings.bookingDetails.date);
-  const number=useSelector((state)=>state.bookings.bookingDetails.visitors);
+  const number = useSelector((state) => state.bookings.bookingDetails.visitors);
 
-  const [slots, setSlots] = useState([
-    {
-      slot: "8:00-9:00",
-      available: 50,
-      waiting: 0,
-      isDisabled: false,
-    },
-    {
-      slot: "9:00-10:00",
-      available: 12,
-      waiting: 0,
-      isDisabled: false,
-    },
-    {
-      slot: "10:00-11:00",
-      available: 0,
-      waiting: 20,
-      isDisabled: false,
-    },
-  ]);
+  const [slots, setSlots] = useState();
 
   useEffect(() => {
     const generateDates = () => {
       // Convert DD-MM-YYYY to YYYY-MM-DD
-      setLoading(true)
+      setLoading(true);
       const [day, month, year] = currDate.split("-");
       const formattedDate = `${year}-${month}-${day}`;
       const date = new Date(formattedDate);
@@ -52,7 +33,26 @@ function Booking() {
       setDates([prev2Date, prevDate, date, nextDate, next2Date]);
       setLoading(false);
     };
-    generateDates();
+    const retrieveData = async () => {
+      setLoading(true);
+      const req = await fetch(
+        `http://localhost:3000/api/booking/getBookedSlots/${date}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await req.json();
+      setSlots(data);
+      setLoading(false);
+    };
+
+    if (currDate) {
+      generateDates();
+      retrieveData();
+    }
   }, [currDate]);
 
   const [active, setActive] = useState(2);
@@ -177,20 +177,21 @@ function Booking() {
           </section>
           <section className="py-4 flex ">
             <div className=" mx-auto flex flex-col gap-2 px-10">
-              {slots.map((item, ind) => {
-                let isAvailable = false;
-                if (item.available - number >= 0) isAvailable = true;
-                return (
-                  <SlotAvailibilty
-                    key={ind}
-                    slotDetails={item}
-                    isAvailable={isAvailable}
-                    fn={fn1}
-                    fn2={fn2}
-                    date={dates?.[active] || 2}
-                  />
-                );
-              })}
+              {slots &&
+                slots.map((item, ind) => {
+                  let isAvailable = false;
+                  if (item.available - number >= 0) isAvailable = true;
+                  return (
+                    <SlotAvailibilty
+                      key={ind}
+                      slotDetails={item}
+                      isAvailable={isAvailable}
+                      fn={fn1}
+                      fn2={fn2}
+                      date={dates?.[active] || 2}
+                    />
+                  );
+                })}
             </div>
           </section>
         </div>

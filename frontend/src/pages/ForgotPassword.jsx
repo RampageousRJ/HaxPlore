@@ -17,12 +17,19 @@ function ForgotPassword() {
     setFormData(null);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
     if (formData.newPassword !== formData.confirmPassword)
       return setError("Passwords do not match");
+    const req = await fetch("http://localhost:3000/api/auth/forgotPassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
   };
 
   return (

@@ -3,10 +3,12 @@ import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bookingDetailsUpdate } from "../features/bookingSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function BookingForm() {
   const [formData, setFormData] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const theme = createTheme({
     components: {
@@ -32,6 +34,7 @@ function BookingForm() {
     e.preventDefault();
     console.log(formData);
     dispatch(bookingDetailsUpdate(formData));
+    navigate("/booking")
   };
   return (
     <form
@@ -75,22 +78,22 @@ function BookingForm() {
           <TextField
             color="warning"
             variant="standard"
-            id="children"
-            name="children"
+            id="infants"
+            name="infants"
             type="number"
             placeholder="No. Children Below 12"
-            value={formData?.children || ""}
+            value={formData?.infants || ""}
             required
             onChange={handleChange}
           />
           <TextField
             color="warning"
             variant="standard"
-            id="senior"
-            name="senior"
+            id="seniors"
+            name="seniors"
             type="number"
             placeholder="No. of Senior Citizens"
-            value={formData?.senior || ""}
+            value={formData?.seniors || ""}
             required
             onChange={handleChange}
           />

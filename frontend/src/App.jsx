@@ -8,19 +8,29 @@ import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import Bookings from "./pages/Bookings";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
+import PaymentSuccessful from "./pages/PaymentSuccesful";
+import PaymentFailure from "./pages/PaymentFailed";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/booking" element={<Booking />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/allBookings" element={<Bookings />} />
-        <Route path="/otpVerification" element={<OTPVerification />} />
         <Route path="/resetPassword" element={<ForgotPassword />} />
+        <Route path="/otpVerification" element={<OTPVerification />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/allBookings" element={<Bookings />} />
         <Route path="/payementDetails" element={<PaymentConfirmation />} />
+        <Route
+          path="/paymentDetails?success=true"
+          element={<PaymentSuccessful />}
+        />
+        <Route
+          path="/paymentDetails?failure=true"
+          element={<PaymentFailure />}
+        />
       </Routes>
     </Router>
   );

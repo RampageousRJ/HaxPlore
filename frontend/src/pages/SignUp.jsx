@@ -134,7 +134,7 @@ function SignUp() {
 
         {/* Google Continue */}
         <OAuth />
-        {/* Alraedy Signed In */}
+        {/* Alreedy Signed Up */}
         <p className="flex justify-between">
           <i>Already signed up? </i>
           <Link to={"/signin"} className=" text-teal-500">
