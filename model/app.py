@@ -35,8 +35,6 @@ def detect_intent(text):
         return 'About'
     elif 'Book' in list2 and text.count('book') or text.count('appointment') or text.count('schedule') or text.count('reserve') or text.count('booking') or text.count('time') or text.count('appoint'):
         return 'Book'
-    
-
 
 @app.route('/', methods=['POST'])
 def home():
@@ -45,7 +43,6 @@ def home():
     if language == 'hi':
         payload['queryResult']['queryText'] = Translator().translate(payload['queryResult']['queryText'], dest='en').text
         payload['queryResult']['intent']['displayName'] = detect_intent(payload['queryResult']['queryText'])
-    
     text = ''
     if payload['queryResult']['intent']['displayName']=='Book':    
         text = book_handler(payload)
@@ -61,7 +58,7 @@ def home():
         text = available_handler(payload)
     else:
         text = fallback_handler(payload)
-    
+    print(text)
     if language == 'hi':
         text = Translator().translate(text, dest='hi').text
     return make_response(jsonify({'fulfillmentText':text}))
