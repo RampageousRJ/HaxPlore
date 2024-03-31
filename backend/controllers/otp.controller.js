@@ -108,7 +108,7 @@ export const verifyOTP=async(req,res)=>{
         if(!isValid){
             res.status(400).json({error:"Invalid OTP",validation:"False"})
         }
-        res.status(200).json({message:"OTP Verification Successful!",validation:"True",data:{userId:id,email:user.email}})
+        res.status(200).json({message:"OTP Verification Successful!",validation:"True",data:{userId:uid,email:userToBeVerified.email}})
         await VerifiedUser.deleteMany({uid})
     }catch(error){
         console.log("Error in verifyOTP:",error.message)
