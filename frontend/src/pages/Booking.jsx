@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { ClipLoader, PacmanLoader } from "react-spinners";
 import bookingSvg from "../assets/White Minimalist Simple Aesthetic Name Twitter Header-4 1.svg";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import SlotAvailibilty from "../components/SlotAvailibilty";
 
-const slots = [
-  {
-    slot: "8:00-9:00",
-    available: 50,
-    waiting: 0,
-  },
-  {
-    slot: "9:00-10:00",
-    available: 10,
-    waiting: 0,
-  },
-  {
-    slot: "10:00-11:00",
-    available: 0,
-    waiting: 20,
-  },
-];
-
 function Booking() {
   const [dates, setDates] = useState(null);
+  const [loading,setLoading]=useState(false);
+
+  const [slots, setSlots] = useState([
+    {
+      slot: "8:00-9:00",
+      available: 50,
+      waiting: 0,
+      isDisabled: false,
+    },
+    {
+      slot: "9:00-10:00",
+      available: 10,
+      waiting: 0,
+      isDisabled: false,
+    },
+    {
+      slot: "10:00-11:00",
+      available: 0,
+      waiting: 20,
+      isDisabled: false,
+    },
+  ]);
 
   useEffect(() => {
     const generateDates = (currDate = "30-06-2023") => {
       // Convert DD-MM-YYYY to YYYY-MM-DD
+      setLoading(true)
       const [day, month, year] = currDate.split("-");
       const formattedDate = `${year}-${month}-${day}`;
 
@@ -41,6 +47,7 @@ function Booking() {
       const prev2Date = new Date(date.getTime());
       prev2Date.setDate(date.getDate() - 2);
       setDates([prev2Date, prevDate, date, nextDate, next2Date]);
+      setLoading(false)
     };
     generateDates();
   }, []);
@@ -48,7 +55,7 @@ function Booking() {
   const [active, setActive] = useState(2);
 
   const decreaseDate = (e) => {
-    e.preventDefault();
+    setLoading(true)
     const currDates = [...dates];
     const temp = new Date(currDates.at(0));
     const prevDate = new Date(temp.getTime());
@@ -56,10 +63,11 @@ function Booking() {
     currDates.pop();
     currDates.unshift(prevDate);
     setDates(currDates);
+    setLoading(false)
   };
 
   const increaseDate = (e) => {
-    e.preventDefault();
+    setLoading(true)
     const currDates = [...dates];
     const temp = new Date(currDates.at(currDates.length - 1));
     const prevDate = new Date(temp.getTime());
@@ -67,7 +75,40 @@ function Booking() {
     currDates.shift();
     currDates.push(prevDate);
     setDates(currDates);
+    setLoading(false)
   };
+
+  // Function to make not selected items disabled
+  const fn1 = (slot) => {
+    const tempSlots = [...slots];
+    tempSlots.map((item, ind) => {
+      if (item.slot !== slot) {
+        item.isDisabled = true;
+      }
+    });
+    setSlots(tempSlots);
+  };
+
+  // Function to clear disabled feature for all
+  const fn2 = () => {
+    const tempSlots = [...slots];
+    tempSlots.map((item) => item.isDisabled = false);
+    setSlots(tempSlots);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col gap-3 justify-center items-center ">
+        <ClipLoader
+          color={"teal"}
+          loading={loading}
+          size={70}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -82,7 +123,7 @@ function Booking() {
       </div>
       <section
         id="date-section"
-        className=" py-4 flex justify-center items-center overflow-x-scroll"
+        className=" py-4 flex justify-center items-center"
       >
         <div className="w-1/4 flex gap-4 items-center justify-center">
           <IoIosArrowBack
@@ -140,9 +181,11 @@ function Booking() {
                 return (
                   <SlotAvailibilty
                     key={ind}
-                    slotDetails={item.slot}
+                    slotDetails={item}
                     isAvailable={isAvailable}
-                    number={item.waiting}
+                    fn={fn1}
+                    fn2={fn2}
+                    date={dates?.[active] || 2}
                   />
                 );
               })}

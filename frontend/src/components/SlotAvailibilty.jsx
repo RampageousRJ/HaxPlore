@@ -1,20 +1,48 @@
 import { Button } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function SlotAvailibilty(props) {
-  const slot = props.slotDetails;
+  const fn = props.fn;
+  const fn2 = props.fn2;
+  const { slot, isDisabled, waiting } = props.slotDetails;
   const available = props.isAvailable;
-  const number = props.number;
+  const date = props.date;
+
   const colorCoding = available ? "success" : "warning";
-  const text = available ? "Available" : `Waiting (${number})`;
+  const text = available ? "Available" : `Waiting (${waiting})`;
 
+  const [details, setDetails] = useState(null);
 
-  const [details,setDetails]=useState(null)
+  useEffect(() => {
+    console.log(date);
+    setDetails(null);
+    fn2();
+  }, [date]);
 
-  const handleClick=(e)=>{
-    e.preventDeafult();
-    
-  }
+  useEffect(() => {
+    const disableEntries = () => {
+      if (!details) return;
+      console.log(details);
+      fn(slot);
+    };
+    disableEntries();
+  }, [details]);
+
+  const handleChange = (e) => {
+    setDetails({
+      ...details,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setDetails({
+      ...details,
+      ["slot"]: slot,
+      ["date"]: date.toISOString().split("T")[0].split("-").reverse().join("-"),
+    });
+  };
 
   return (
     <div className="flex items-center py-8 px-5 border-b-2 justify-around gap-12">
@@ -27,25 +55,57 @@ function SlotAvailibilty(props) {
         </h4>
         <section className="flex gap-3 items-center">
           <div className="flex items-center justify-center gap-1">
-            <input type="radio" name="wheelchair" id="wheelchair" />
+            <input
+              type="checkbox"
+              name="wheelchair"
+              disabled={isDisabled}
+              value={details?.wheelchair || false}
+              id="wheelchair"
+              checked={details?.wheelchair ?? false}
+              onChange={handleChange}
+            />
             <label htmlFor="wheelchair" className="text-xs">
               Wheelchair Assistance
             </label>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <input type="radio" name="anna" id="anna" />
+            <input
+              type="checkbox"
+              name="anna"
+              disabled={isDisabled}
+              value={details?.anna || false}
+              checked={details?.anna || false}
+              id="anna"
+              onChange={handleChange}
+            />
             <label htmlFor="anna" className="text-xs">
               Anna Seva
             </label>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <input type="radio" name="aarti" id="aarti" />
+            <input
+              type="checkbox"
+              name="aarti"
+              disabled={isDisabled}
+              value={details?.aarti || false}
+              checked={details?.aarti || false}
+              id="aarti"
+              onChange={handleChange}
+            />
             <label htmlFor="aarti" className="text-xs">
               Aarti Seva
             </label>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <input type="radio" name="darshan" id="darshan" />
+            <input
+              type="checkbox"
+              name="darshan"
+              disabled={isDisabled}
+              value={details?.darshan || false}
+              checked={details?.darshan || false}
+              id="darshan"
+              onChange={handleChange}
+            />
             <label htmlFor="darshan" className="text-xs">
               Priority Darshan
             </label>
@@ -53,9 +113,10 @@ function SlotAvailibilty(props) {
         </section>
       </div>
       <Button
-        isDisabled
+        isDisabled={isDisabled}
         color={colorCoding}
         variant="solid"
+        onClick={handleClick}
         className="py-4 w-36 text-white font-semibold cursor-pointer"
       >
         {text}
