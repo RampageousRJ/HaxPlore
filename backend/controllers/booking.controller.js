@@ -1,5 +1,8 @@
 import Booking from '../models/bookingModel.js'
 import qr from 'qrcode'
+import Waitlist from '../models/waitlistModel.js';
+import { sendConfirmMail } from '../utils/sendConfirmationMail.js';
+import User from '../models/userModel.js';
 
 export const newBooking=async(req,res)=>{
     
@@ -16,21 +19,21 @@ export const newBooking=async(req,res)=>{
       }
     try {
         const id=req.params.id;
-        const {date,name,phone,slot,attendees,seniors,infants,anna,aarti,darshan,wheelchair,isConfirmed}=req.body
+        const {date,name,phone,slot,visitors,seniors,infants,anna,aarti,darshan,wheelchair,isConfirmed}=req.body
         const wheelCost=wheelchair?parseInt(process.env.WHEELCHAIR_COST):0
-        const annaCost=anna?parseInt(process.env.ANNA_COST)*parseInt(attendees):0
+        const annaCost=anna?parseInt(process.env.ANNA_COST)*parseInt(visitors):0
         const aartilCost=aarti?parseInt(process.env.AARTI_COST):0
-        const darshanCost=darshan?parseInt(process.env.DARSHAN_COST)*parseInt(attendees):0
+        const darshanCost=darshan?parseInt(process.env.DARSHAN_COST)*parseInt(visitors):0
         const infantsCost=parseInt(process.env.INFANT_COST)*parseInt(infants)
         const seniorsCost=parseInt(process.env.SENIOR_COST)*parseInt(seniors)
-        const amount=(parseInt(process.env.COST)*(parseInt(attendees)-(parseInt(infants)+parseInt(seniors))))+infantsCost+seniorsCost+wheelCost+aartilCost+annaCost+darshanCost;
+        const amount=(parseInt(process.env.COST)*(parseInt(visitors)-(parseInt(infants)+parseInt(seniors))))+infantsCost+seniorsCost+wheelCost+aartilCost+annaCost+darshanCost;
         const newBooking= new Booking({
             uid:id,
             date,
             name,
             phone,
             slot,
-            attendees,
+            visitors,
             seniors,
             infants,
             anna,
@@ -47,6 +50,20 @@ export const newBooking=async(req,res)=>{
             const currentBooking=await Booking.findOneAndUpdate({_id:newBooking._id},{QRCode:QRCode},{new:true})
             if(currentBooking){
                 await currentBooking.save();
+                if(!currentBooking.isConfirmed){
+                    const waitRecord=await Waitlist.findOne({$and:[{date:currentBooking.date},{slot:currentBooking.slot}]})
+                    if(!waitRecord){
+                        const newWaitRec=await Waitlist.create({
+                            date:currentBooking.date,
+                            slot:currentBooking.slot,
+                            pendingBookings:[currentBooking._id,]
+                        })
+                    }else{
+                        console.log(waitRecord.pendingBookings)
+                        waitRecord.pendingBookings.push(currentBooking._id)
+                        await waitRecord.save()
+                    }
+                }
                 res.status(201).json(currentBooking)
             }  
         else{
@@ -77,6 +94,23 @@ export const removeBooking=async(req,res)=>{
             res.status(400).json({"message":"No such Booking exists."})
         }
         else{
+            if(cancelledBooking.isConfirmed){
+                const waitlist=await Waitlist.findOne({$and:[{date:cancelledBooking.date},{slot:cancelledBooking.slot}]})
+                if(waitlist?.pendingBookings?.length>0){
+                    const waitBooks=waitlist.pendingBookings
+                    console.log(waitBooks)
+                    const selectedBooking=waitBooks.shift()
+                    //  console.log(selectedBooking)
+                    console.log(waitBooks)
+                    const updatedBooks= await Waitlist.updateOne({$and:[{date:cancelledBooking.date},{slot:cancelledBooking.slot}]},{$set:{pendingBookings:waitBooks}},{new:true})
+                    //await updatedBooks.save()
+                    const currSelectedBooking=await Booking.findOneAndUpdate({_id:selectedBooking},{$set:{isConfirmed:true}},{new:true})
+                    //const currSelectedBooking=await Booking.findOne({_id:selectedBooking})
+                    //console.log("curr",currSelectedBooking)
+                    const selectedUser=await User.findById({_id:currSelectedBooking.uid})
+                    sendConfirmMail(currSelectedBooking,selectedUser.email)
+                }
+            }
             await Booking.deleteOne({_id})
             res.status(200).json({"status":"Booking Cancelled Succesfully",_id})
         }
@@ -107,7 +141,7 @@ export const getBookedSlots=async(req,res)=>{
         let totalbook=0;
         let totalwait=0;
         //const finalRes=[]
-        const bookedCounts=bookings.map((booking)=>booking.attendees)
+        const bookedCounts=bookings.map((booking)=>booking.visitors)
         for(let i=0;i<bookedCounts.length;i++){
             totalbook+=bookedCounts[i]
         }
@@ -116,8 +150,8 @@ export const getBookedSlots=async(req,res)=>{
         }
         const slot1Details=await Booking.find({$and:[{date},{slot:process.env.SLOT1},{isConfirmed:true}]})
         const wait1Details=await Booking.find({$and:[{date},{slot:process.env.SLOT1},{isConfirmed:false}]})
-        const slot1=slot1Details.map((detail)=>detail.attendees)
-        const wait1=wait1Details.map((detail)=>detail.attendees)
+        const slot1=slot1Details.map((detail)=>detail.visitors)
+        const wait1=wait1Details.map((detail)=>detail.visitors)
         let slot1Count=0;
         let wait1Count=0;
         for(let i=0;i<slot1.length;i++){
@@ -128,8 +162,8 @@ export const getBookedSlots=async(req,res)=>{
         }
         const slot2Details=await Booking.find({$and:[{date},{slot:process.env.SLOT2},{isConfirmed:true}]})
         const wait2Details=await Booking.find({$and:[{date},{slot:process.env.SLOT2},{isConfirmed:false}]})
-        const slot2=slot2Details.map((detail)=>detail.attendees)
-        const wait2=wait2Details.map((detail)=>detail.attendees)
+        const slot2=slot2Details.map((detail)=>detail.visitors)
+        const wait2=wait2Details.map((detail)=>detail.visitors)
         let slot2Count=0;
         let wait2Count=0;
         for(let i=0;i<slot2.length;i++){
@@ -140,8 +174,8 @@ export const getBookedSlots=async(req,res)=>{
         }
         const slot3Details=await Booking.find({$and:[{date},{slot:process.env.SLOT3},{isConfirmed:true}]})
         const wait3Details=await Booking.find({$and:[{date},{slot:process.env.SLOT3},{isConfirmed:false}]})
-        const slot3=slot3Details.map((detail)=>detail.attendees)
-        const wait3=wait3Details.map((detail)=>detail.attendees)
+        const slot3=slot3Details.map((detail)=>detail.visitors)
+        const wait3=wait3Details.map((detail)=>detail.visitors)
         let slot3Count=0;
         let wait3Count=0;
         for(let i=0;i<slot3.length;i++){
@@ -152,8 +186,8 @@ export const getBookedSlots=async(req,res)=>{
         }
         const slot4Details=await Booking.find({$and:[{date},{slot:process.env.SLOT4},{isConfirmed:true}]})
         const wait4Details=await Booking.find({$and:[{date},{slot:process.env.SLOT4},{isConfirmed:false}]})
-        const slot4=slot4Details.map((detail)=>detail.attendees)
-        const wait4=wait4Details.map((detail)=>detail.attendees)
+        const slot4=slot4Details.map((detail)=>detail.visitors)
+        const wait4=wait4Details.map((detail)=>detail.visitors)
         let slot4Count=0;
         let wait4Count=0;
         for(let i=0;i<slot4.length;i++){

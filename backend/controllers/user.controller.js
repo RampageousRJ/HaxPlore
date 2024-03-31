@@ -5,10 +5,7 @@ import genTokenAndSetCookie from "../utils/generateToken.js"
 export const signup=async(req,res)=>{
     try {
         const {name,email,password,confirmPassword,phone}=req.body
-        if(password!==confirmPassword){
-            return res.status(400).json({error:"Passwords dont match"})
-        }
-        const userEmail=await User.findOne({email})
+        const userEmail=await User.findOne({email}).select("-password")
         const userPhone=await User.findOne({phone})
         if(userEmail || userPhone){
             if(userEmail){
@@ -18,7 +15,11 @@ export const signup=async(req,res)=>{
                 return res.status(200).json({message:"Account already exists"})
             }
         }
-        
+        if(confirmPassword){
+            if(password!==confirmPassword){
+                return res.status(400).json({error:"Passwords dont match"})
+            }
+        }
         //HASH password here
         const salt= await bcrypt.genSalt(10)
         const hashedPassword=await bcrypt.hash(password,salt)
@@ -55,15 +56,9 @@ export const signin=async(req,res)=>{
         if(!user || !isPasswordCorrect){
             return res.status(400).json({error:"Invalid username or password"})
         }
-
         genTokenAndSetCookie(user._id,res)
-        
-        res.status(200).json({
-            _id:user._id,
-            name:user.name,
-            email:user.email,
-            phone:user.phone,
-        })
+        delete user.password     
+        res.status(200).json({user})
 
     } catch (err) {
         console.log("Error in login",err.message)
