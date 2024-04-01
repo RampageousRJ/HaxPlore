@@ -10,6 +10,7 @@ import Bookings from "./pages/Bookings";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import PaymentSuccessful from "./pages/PaymentSuccesful";
 import PaymentFailure from "./pages/PaymentFailed";
+import ChatBot from "./pages/ChatBot";
 
 function App() {
   return (
@@ -23,15 +24,11 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/allBookings" element={<Bookings />} />
         <Route path="/payementDetails" element={<PaymentConfirmation />} />
-        <Route
-          path="/paymentDetails?success=true"
-          element={<PaymentSuccessful />}
-        />
-        <Route
-          path="/paymentDetails?failure=true"
-          element={<PaymentFailure />}
-        />
+        <Route path="/chatbot" element={<ChatBot />} />
+        <Route path="/donePayment" element={<PaymentSuccessful />} />
+        <Route path="/failedPayment" element={<PaymentFailure />} />
       </Routes>
+      <ChatBot />
     </Router>
   );
 }

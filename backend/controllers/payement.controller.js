@@ -20,8 +20,9 @@ export const newOrder = async (req, res) => {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: "http://localhost:5173/paymentDetails?success=true", // Correct typo in URL
-      cancel_url: "http://localhost:5173/paymentDetails?failure=true", // Correct typo in URL
+      // Dynamically add the session ID as a query parameter to the success URL
+      success_url: `http://localhost:5173/donePayment?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: "http://localhost:5173/failedPayment",
     });
     console.log(session);
     res.json({ session, id: session.id });

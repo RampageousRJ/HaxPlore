@@ -4,8 +4,8 @@ import protectRoute from "../middleware/protectRoute.js";
 
 const router=Router();
 
-router.get("/send-OTP/:email",protectRoute,sendOTP)
-router.post("/verify-OTP/:id",protectRoute,verifyOTP)
-router.post("/set-newPassword/:id",protectRoute,setNewpassword)
+router.get("/send-OTP/:email",sendOTP)
+router.post("/verify-OTP/:id",verifyOTP)
+router.post("/set-newPassword/:id",setNewpassword)
 
 export default router

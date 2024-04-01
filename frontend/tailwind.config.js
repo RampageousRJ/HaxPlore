@@ -31,10 +31,14 @@ export default {
         'custom-yellow': '#F1AB3C',
         "ticket-orange": "#FF8900",
         "gray-checkout": "#6E6C6C",
+        'light-orange': '#FFA07A' // Example light orange color
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(to bottom, #E54717, #F57A42 25%, #F1AB3C 50%, #FBD38D 75%)',
       },
+      boxShadow: {
+        'custom-orange': '0 4px 6px -1px rgba(255, 160, 122, 0.5), 0 2px 4px -2px rgba(255, 160, 122, 0.5)' // Custom light orange box shadow
+      }
     },
   },
   darkMode: "class",

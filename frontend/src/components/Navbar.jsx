@@ -1,7 +1,9 @@
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { signOutSuccess } from "../features/userSlice";
+import { bookingSuccess } from "../features/bookingSlice";
 
 function Navbar() {
   const user = useSelector((state) => state.user.userDetails);
@@ -9,6 +11,7 @@ function Navbar() {
   const [text, setText] = useState("Login");
   const [link, setLink] = useState("/signin");
   const navigate = useNavigate();
+  const dispath = useDispatch();
 
   useEffect(() => {
     const fn1 = () => {
@@ -27,13 +30,16 @@ function Navbar() {
     if (link === "/signin") return navigate("/signin");
     let url = "http://localhost:3000/api/auth/signout";
     const req = await fetch(url, {
-      method: "GET",
+      method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await req.json();
     if (data.error) return console.log(data.error);
+    dispath(bookingSuccess());
+    dispath(signOutSuccess());
     navigate("/");
   };
   return (
@@ -44,10 +50,10 @@ function Navbar() {
           Home
         </Link>
         <Link
-          to={"/Booking"}
+          to={"/allBookings"}
           className="text-white text-xl hover:text-slate-300"
         >
-          Booking
+          Bookings
         </Link>
         <Link
           to={"/contact"}

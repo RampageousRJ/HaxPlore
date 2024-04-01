@@ -1,11 +1,18 @@
 import { Alert, TextField, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { signOutSuccess } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
   const [formData, setFormData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userID = useSelector((state) => state?.user?.userDetails?._id ?? "");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,13 +30,26 @@ function ForgotPassword() {
     setLoading(true);
     if (formData.newPassword !== formData.confirmPassword)
       return setError("Passwords do not match");
-    const req = await fetch("http://localhost:3000/api/auth/forgotPassword", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    console.log(formData, userID);
+    const res = await fetch(
+      `http://localhost:3000/api/forgot-password/set-newPassword/${userID}`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: formData.newPassword,
+          confirmPassword: formData.confirmPassword,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (data.error) return console.log(data.error);
+    dispatch(signOutSuccess());
+    navigate("/signin");
+    nav;
   };
 
   return (
@@ -48,6 +68,7 @@ function ForgotPassword() {
           size="small"
           placeholder="Enter new password.."
           label="New Password"
+          type="password"
           name="newPassword"
           id="newPassword"
           required
@@ -61,6 +82,7 @@ function ForgotPassword() {
           placeholder="Confirm new password.."
           name="confirmPassword"
           id="confirmPassword"
+          type="password"
           required
           color="warning"
           className="w-full"
@@ -68,7 +90,6 @@ function ForgotPassword() {
         />
         <Button
           variant="contained"
-          isLoading={loading}
           type="submit"
           name="reset-btn"
           color="warning"

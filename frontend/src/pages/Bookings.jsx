@@ -28,7 +28,13 @@ function Bookings() {
     const fetchDetails = async () => {
       setLoading(true);
       let results = await fetch(
-        `http://localhost:3000/api/booking/getBookings/${userId}`
+        `http://localhost:3000/api/booking/getBookings/${userId}`,{
+          method:'GET',
+          credentials: 'include',
+          headers:{
+            'Content-Type':"application/json"
+          }
+        }
       );
       let data = await results.json();
       if (data.error) return console.log("Error");
@@ -41,26 +47,32 @@ function Bookings() {
   }, [userId]);
 
   const view = async (id) => {
+    console.log(id);
     setLoading(true);
     const req = await fetch(
       `http://localhost:3000/api/booking/getOneBooking/${id}`,
       {
         method: "GET",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
     const data = await req.json();
-    if (data.error) console.log(data.error);
-    else setShowTicket(data);
+    if (data.error) return console.log(data.error);
+    console.log(data);
+    setLoading(false)
+    setShowTicket(data);
   };
 
   const remove = async (id) => {
+    console.log(id);
     const req = await fetch(
       `http://localhost:3000/api/booking/cancelBooking/${id}`,
       {
-        method: "GET",
+        method: "DELETE",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
@@ -95,7 +107,7 @@ function Bookings() {
         <section className="relative">
           <Ticket details={showTicket} />
           <IoIosCloseCircle
-            className="absolute top-2 right-2"
+            className="absolute top-2 cursor-pointer text-white text-2xl right-2"
             onClick={handleClose}
           />
         </section>
@@ -133,22 +145,22 @@ function Bookings() {
             </motion.tr>
           ))}
         </tbody>
-        <Button
-          color="primary"
-          variant="contained"
-          type="submit"
-          sx={{
-            background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
-            boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/");
-          }}
-        >
-          Go Back
-        </Button>
       </table>
+      <Button
+        color="primary"
+        variant="contained"
+        type="submit"
+        sx={{
+          background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+          boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
+        }}
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/");
+        }}
+      >
+        Go Back
+      </Button>
     </div>
   );
 }

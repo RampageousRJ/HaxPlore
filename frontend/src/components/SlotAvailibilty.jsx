@@ -18,7 +18,7 @@ function SlotAvailibilty(props) {
   const [shouldDispatch, setShouldDispatch] = useState(false);
   const bookingDetails = useSelector((state) => state.bookings.bookingDetails);
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setDetails(null);
@@ -38,7 +38,7 @@ function SlotAvailibilty(props) {
       if (details) {
         console.log(details);
         dispatch(bookingDetailsUpdate({ ...bookingDetails, ...details }));
-        navigate("/")
+        navigate("/payementDetails");
       }
     };
     updateState();
@@ -57,6 +57,7 @@ function SlotAvailibilty(props) {
       ...details,
       ["slot"]: slot,
       ["date"]: date.toISOString().split("T")[0].split("-").reverse().join("-"),
+      ["isConfirmed"]: available,
     });
     setShouldDispatch(true);
   };
