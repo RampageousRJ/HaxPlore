@@ -1,13 +1,6 @@
 from flask import make_response,jsonify
 import numpy as np
 import random
-# from sentence_transformers import SentenceTransformer, util
-# model = SentenceTransformer("all-MiniLM-L6-v2")
-
-# def calculate_similarity(sentence1,sentence2):
-#   sentence1_embedding = model.encode(sentence1, convert_to_tensor=True)
-#   sentence2_embedding = model.encode(sentence2, convert_to_tensor=True)
-#   return util.cos_sim(sentence1_embedding, sentence2_embedding)[0][0].item()
 
 history = [
     "The history of the Ayodhya Ram Mandir is centuries-old. The temple is built on the site believed to be the birthplace of Lord Ram, one of the most revered Hindu deities. The temple was demolished by the Mughal emperor Babur in the 16th century and a mosque was built in its place. The mosque, known as the Babri Masjid, stood on the site for centuries until it was demolished in 1992 by Hindu nationalists, triggering widespread violence and communal tensions in the country.\nThe Ayodhya dispute has been a contentious issue in Indian politics for decades. The dispute revolved around the ownership of the site where the Babri Masjid stood and whether it was the birthplace of Lord Ram. The dispute was finally settled by the Indian Supreme Court in 2019, which ruled in favor of the construction of a Ram Janmabhoomi temple on the site. The construction of the temple was undertaken by the Shri Ram Janmabhoomi Teerth Kshetra, a trust formed by the Indian government to oversee the construction of the temple.\nRead More: https://www.trimbakeshwar.org/articles/Ayodhya-Ram-Mandir-Lord-Ram-Temple-Ram-Janmabhoomi-Hindu-temple-in-Ayodhya",
@@ -16,27 +9,6 @@ history = [
 
     "Steeped in mythology and marked by historical shifts, the Ayodhya Ram Mandir is a site of immense importance for Hindus. Revered as the birthplace of Lord Rama, a central figure in the epic Ramayana, the land holds a special place in their hearts.\nCenturies ago, in the 16th century, a mosque known as the Babri Masjid was built on the site. It stood for a significant period until 1992, when its demolition by Hindu nationalists ignited religious tensions.\nThe ownership of the land and its religious significance became a focal point of debate in Indian politics for decades. Finally, in 2019, a landmark verdict by the Supreme Court of India paved the way for the construction of a Ram temple at the birthplace of Lord Rama.\nThe construction of this monumental temple is being overseen by the Shri Ram Janmabhoomi Teerth Kshetra, a trust established by the Indian government.\nRead More: https://www.trimbakeshwar.org/articles/Ayodhya-Ram-Mandir-Lord-Ram-Temple-Ram-Janmabhoomi-Hindu-temple-in-Ayodhya"
 ]
-
-similarity = {
-    "Booking":{
-        "What is the procedure of booking a darshan tocket for the Ayodhya mandir?":np.nan
-    },
-    "History":{
-        "What is the history of the Ayodhya Ram Mandir?":np.nan
-    },
-    "Availability":{
-        "What is the availability of darshan tickets for the Ayodhya Ram Mandir?":np.nan
-    },
-    "Location":{
-        "Can you guide me with where the mandir is located for a smooth travel expeirence?":np.nan
-    },
-    "Cancel":{
-        "How can I cancel my darshan ticket for the Ayodhya Ram Mandir?":np.nan
-    },
-    "About":{
-        "Can you explain more and give details about the mandir?":np.nan
-    }
-}
 
 architecture = [
     "The Ram Mandir in Ayodhya is a massive Hindu temple under construction. Designed by the Sompura family, it will be 161 feet tall and built in the Māru-Gurjara architecture. The temple will have a central sanctum and five halls, with dedicated shrines for various deities. Sustainability is a focus, with 70% of the land preserved as green space. Construction avoids iron and steel, using copper plates to fuse stone blocks. Upon completion, it will be one of the world's largest Hindu temples.\n Read More: https://en.wikipedia.org/wiki/Ram_Mandir#Architecture",
@@ -48,13 +20,15 @@ architecture = [
 
 about = [
     "In the holy city of Ayodhya, a beacon of faith, the Ram Mandir, nears completion. The Sompura family, renowned for generations of temple design, guides its construction. This colossal Hindu temple embodies devotion.  Within its walls, a central sanctum, the holiest space, is surrounded by five unique halls, each dedicated to prayer and reflection. Sustainability is a core principle, with most of the land preserved as green space, fostering harmony with nature. The construction process itself is remarkable, using copper instead of iron or steel to bind the sandstone blocks. Upon completion, this magnificent structure will be one of the world's largest Hindu temples, a testament to enduring faith and tradition. Read More: https://en.wikipedia.org/wiki/Ram_Mandir",
+    
+    'In Ayodhya, the Ram Mandir, nearing completion, stands as a beacon of faith, guided by the renowned Sompura family across generations. This monumental Hindu temple reflects deep devotion, featuring a central sanctum surrounded by five prayer halls, all emphasizing sustainability by preserving extensive green spaces and utilizing innovative construction methods such as copper binding instead of traditional iron or steel. Upon its forthcoming completion, the Ram Mandir will rank among the largest Hindu temples of the world, a testament to enduring faith and tradition. Read More: https://en.wikipedia.org/wiki/Ram_Mandir'
 ]
 
 def book_handler(payload):
-    return 'You can view the FAQ section in our website for more information!'
+    return '''Proceed to /booking -> Ensure you are logged in -> Provide necessary details -> Click 'BOOK NOW' -> proceed to the payment gateway -> Once payment is confirmed, you can access your booked ticket at /get-booking.'''
 
 def cancel_handler(payload):
-    return 'For cancelling information please refer to the Cancel Policy on our website!'
+    return "Ensure you are logged in -> Navigate to 'VIEW BOOKINGS' tab -> Click 'CANCEL' -> proceed to the payment gateway -> Once payment is confirmed, you can access your booked ticket at /get-booking."
 
 def available_handler(payload):
     date = payload['queryResult']['parameters']['date-time']
@@ -67,7 +41,9 @@ def history_handler(payload):
     return result
 
 def about_handler(payload):
-    if payload['queryResult']['parameters']['Architecture']:
+    if len(payload['queryResult']['parameters']):
+        return random.choice(about)
+    elif payload['queryResult']['parameters']['Architecture']:
         result = random.choice(architecture)
     elif payload['queryResult']['parameters']['Deity']:
         result = "The Ayodhya Ram Mandir is rising to honor Lord Rama's birthplace. The main idol within the temple will depict Rama in his infant form, reflecting his status as an avatar of Vishnu.  Interestingly, a different idol installed earlier holds a special place. Placed in 1949, it was revered as 'Ram Lalla Virajman' by local devotees. This idol even played a unique role in the legal case concerning the site, being considered a legal entity. With the new main idol taking its place, Ram Lalla Virajman will now be used for special occasions and festivals. Devotees will offer prayers, hymns, and various offerings to both idols. Daily rituals will meticulously observe the traditions associated with Lord Rama's worship, ensuring a continuous cycle of devotion."
@@ -77,30 +53,24 @@ def about_handler(payload):
 
 def location_handler(payload):
     if payload['queryResult']['parameters']['location']:
-        result = "The Ayodhya Ram Mandir is located in Ayodhya, Uttar Pradesh, India. The exact address is Ayodhya, Uttar Pradesh 224123, India. You can use the following coordinates to reach the temple: 26.7925° N, 82.1944° E\n You can refer the location using https://maps.app.goo.gl/J6SV1gbMqCjgXxYC6"
+        result = "The Ayodhya Ram Mandir is located in Ayodhya, Uttar Pradesh, India. The exact address is Ayodhya, Uttar Pradesh 224123, India. You can use the following coordinates to reach the temple: 26.7925° N, 82.1944° E You can refer the location using https://maps.app.goo.gl/J6SV1gbMqCjgXxYC6"
+    else:
+        result = "Some of the best ways to reach the temple can be by road, rail or air. The nearest airport is the Chaudhary Charan Singh International Airport in Lucknow, which is approximately 140 km away from Ayodhya. The nearest railway station is the Ayodhya Junction, which is well-connected to major cities in India. You can also reach Ayodhya by road via the National Highways. For more information, you can visit https://tinyurl.com/travel-methods"
+    return result
+
+def pricing_handler(payload):
+    result = "PRICE: $20"
+    return result
+
+def website_handler(payload):
+    return "Welcome to our platform for booking visiting slots at the magnificent Ayodhya Ram Mandir Temple. Immerse yourself in the divinity of this sacred site by easily booking your preferred slots, checking real-time availability, and even securing a place on our waitlist. With live updates on slot availability and waitlist status, your journey to spirituality has never been more seamless. Plus, rest assured with our comprehensive refund policy. Join us in experiencing the serenity of Ayodhya Ram Mandir Temple, where every visit is a step closer to divine enlightenment."
+
+def location_handler(payload):
+    if payload['queryResult']['parameters']['location']:
+        result = "The Ayodhya Ram Mandir is located in Ayodhya, Uttar Pradesh, India. The exact address is Ayodhya, Uttar Pradesh 224123, India. You can use the following coordinates to reach the temple: 26.7925° N, 82.1944° E You can refer the location using https://maps.app.goo.gl/J6SV1gbMqCjgXxYC6"
     else:
         result = "Some of the best ways to reach the temple can be by road, rail or air. The nearest airport is the Chaudhary Charan Singh International Airport in Lucknow, which is approximately 140 km away from Ayodhya. The nearest railway station is the Ayodhya Junction, which is well-connected to major cities in India. You can also reach Ayodhya by road via the National Highways. For more information, you can visit https://tinyurl.com/travel-methods"
     return result
 
 def fallback_handler(payload):
-    # highest_intent = ""
-    # highest_score = -5
-    # for intent in similarity:
-    #     for query in similarity[intent]:
-    #         similarity[intent][query] = calculate_similarity(payload['queryResult']['queryText'],query)
-    #         if highest_score<similarity[intent][query]:
-    #             highest_score = similarity[intent][query]
-    #             highest_intent = intent
-    # print(highest_intent, highest_score)
-    # if float(highest_score)<0.3:
     return "That's an interesting question! Unfortunately, I can't understand it completely. Can you rephrase it for me, or perhaps you could ask something related to the history of temple, location, or the booking procedure?"
-    # elif highest_intent=='Booking':
-    #     return book_handler(payload)
-    # elif highest_intent=='History':
-    #     return history_handler(payload)
-    # elif highest_intent=='Location':
-    #     return location_handler(payload)
-    # elif highest_intent=='About':
-    #     return about_handler(payload)
-    # elif highest_intent=='Cancel':
-    #     return cancel_handler(payload)

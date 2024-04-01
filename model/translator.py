@@ -1,5 +1,7 @@
 from googletrans import Translator
 translator = Translator()
 
-text = "क्या आप संक्षेप में मंदिर के इतिहास की व्याख्या कर सकते हैं?"
-print(translator.translate(text, dest='en').text)
+text = "Can you explain the cancellation policy?"
+translated = translator.translate(text, dest='hi').text
+print(translated)
+print(translator.translate(translated, dest='en').text)
