@@ -23,21 +23,24 @@ function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
       dispatch(signInStart());
-      const req = await fetch("http://localhost:3000/api/v1/signin", {
+      const req = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData), // HTTP only handles text data
       });
       const data = await req.json();
+      console.log(data.user);
       if (data.error) {
         return dispatch(signInFailure(data.error));
       } 
       else {
-        dispatch(signInSuccess(data.userEmail));
+        dispatch(signInSuccess(data.user));
         setFormData(null);
         navigate("/");
         return;

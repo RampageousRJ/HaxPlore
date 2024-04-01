@@ -7,9 +7,9 @@ table {
 
 /* Header styles */
 th {
-  background-color: #38b2ac;
+  background: linear-gradient(145deg, #ff7e5f, #feb47b); /* Orange gradient for header */
   color: #ffffff;
-  border: 2px solid #2c7a7b;
+  border: 2px solid #f56a00; /* Darker orange for border */
   padding: 10px 20px;
   text-align: left; /* Ensures consistency in text alignment */
 }
@@ -17,22 +17,22 @@ th {
 /* Cell styles */
 td {
   padding: 10px 20px; /* Increase padding for better spacing */
-  border-bottom: 1px solid #2c7a7b; /* Adds a subtle border to each row for separation */
+  border-bottom: 1px solid #f56a00; /* Darker orange for row separation */
 }
 
 /* Row styling for hover effect */
 tr:hover {
-  background-color: #e0f2f1; /* A light teal shade for hover, enhancing interactivity */
+  background-color: #ffe5d4; /* A light orange shade for hover, enhancing interactivity */
 }
 
 /* Zebra striping for rows */
 tbody tr:nth-child(odd) {
-  background-color: #f0fdfa; /* A very light teal, for every other row */
+  background-color: #fff4e6; /* A very light orange, for every other row */
 }
 
 /* First column emphasis */
 td:first-child {
-  font-weight: bold; /* Makes the first column (UserName) more prominent */
+  font-weight: bold; /* Makes the first column (e.g., UserName) more prominent */
 }
 
 /* Adjustments for mobile responsiveness (optional) */

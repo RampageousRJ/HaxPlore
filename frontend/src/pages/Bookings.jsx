@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Ticket from "../components/Ticket";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
+import { GiConfirmed } from "react-icons/gi";
 
 function Bookings() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user.userDetails._id);
   const [showTicket, setShowTicket] = useState(false);
+  const [removed, setRemoved] = useState(null);
   const [result, setResult] = useState([
     {
       name: "Swapnil",
@@ -28,7 +30,14 @@ function Bookings() {
     const fetchDetails = async () => {
       setLoading(true);
       let results = await fetch(
-        `http://localhost:3000/api/booking/getBookings/${userId}`
+        `http://localhost:3000/api/booking/getBookings/${userId}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       let data = await results.json();
       if (data.error) return console.log("Error");
@@ -41,26 +50,32 @@ function Bookings() {
   }, [userId]);
 
   const view = async (id) => {
+    console.log(id);
     setLoading(true);
     const req = await fetch(
       `http://localhost:3000/api/booking/getOneBooking/${id}`,
       {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
     const data = await req.json();
-    if (data.error) console.log(data.error);
-    else setShowTicket(data);
+    if (data.error) return console.log(data.error);
+    console.log(data);
+    setLoading(false);
+    setShowTicket(data);
   };
 
   const remove = async (id) => {
+    console.log(id);
     const req = await fetch(
       `http://localhost:3000/api/booking/cancelBooking/${id}`,
       {
-        method: "GET",
+        method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -68,6 +83,20 @@ function Bookings() {
     );
     const data = await req.json();
     if (data.error) console.log(data.error);
+    const req2 = await fetch(
+      `http://localhost:3000/api/security/get-transaction-record/${id}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data2 = await req2.json();
+    if (data2.error) console.log(data2.error);
+    setRemoved(data2.transactionId);
+
     navigate("/allBookings");
   };
 
@@ -95,7 +124,7 @@ function Bookings() {
         <section className="relative">
           <Ticket details={showTicket} />
           <IoIosCloseCircle
-            className="absolute top-2 right-2"
+            className="absolute top-2 cursor-pointer text-white text-2xl right-2"
             onClick={handleClose}
           />
         </section>
@@ -122,7 +151,7 @@ function Bookings() {
               key={index}
               initial={{ opacity: 0, x: -200 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, delay: 0.35 * index }}
+              transition={{ duration: 0.5, delay: 0.15 * index }}
             >
               <IndividualRow
                 key={index}
@@ -133,22 +162,27 @@ function Bookings() {
             </motion.tr>
           ))}
         </tbody>
-        <Button
-          color="primary"
-          variant="contained"
-          type="submit"
-          sx={{
-            background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
-            boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/");
-          }}
-        >
-          Go Back
-        </Button>
       </table>
+      <Button
+        color="primary"
+        variant="contained"
+        type="submit"
+        sx={{
+          background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+          boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
+        }}
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/");
+        }}
+      >
+        Go Back
+      </Button>
+      {removed && (
+        <h1 className="mt-4 text-2xl bg-orange-800">
+          Refund Processed for Transaction ID: {removed} <GiConfirmed />{" "}
+        </h1>
+      )}
     </div>
   );
 }

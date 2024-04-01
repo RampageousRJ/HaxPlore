@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Ticket from "../components/Ticket";
 import bookingSvg from "../assets/White Minimalist Simple Aesthetic Name Twitter Header-4 1.svg";
 import { Button } from "@nextui-org/react";
 import { loadStripe } from "@stripe/stripe-js";
+import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader, PacmanLoader } from "react-spinners";
+import { bookingDetailsUpdate } from "../features/bookingSlice";
 
 function PaymentConfirmation() {
+  const bookingDetails = useSelector((state) => state.bookings.bookingDetails);
+  const [loading, setLoading] = useState(true);
+  const [everything, setEverything] = useState(null);
+  const userId = useSelector((state) => state.user.userDetails._id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setLoading(true);
+    const newBooking = async () => {
+      setLoading(true);
+      const req = await fetch(
+        `http://localhost:3000/api/booking/newBooking/${userId}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...bookingDetails }),
+        }
+      );
+
+      const data = await req.json();
+      if (data.error) return console.log(data.error);
+      console.log(data);
+      setEverything(data);
+      dispatch(bookingDetailsUpdate(data));
+      setLoading(false);
+    };
+    if (userId) newBooking();
+  }, [userId]);
+
   const handleClick = async (e) => {
     const items = [
       {
@@ -23,6 +58,7 @@ function PaymentConfirmation() {
       "http://localhost:3000/api/payment/create-checkout-session",
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -38,6 +74,20 @@ function PaymentConfirmation() {
       console.log(result.error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col gap-3 justify-center items-center ">
+        <ClipLoader
+          color={"teal"}
+          loading={loading}
+          size={70}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -59,22 +109,31 @@ function PaymentConfirmation() {
           <h1 className="text-xl font-bold text-black">Bill details</h1>
           <section className="py-6 flex flex-col gap-3">
             <div className="flex justify-between items-center ">
-              <p>Adult Pass x 3</p>
-              <p>$200</p>
+              <p>
+                Adult Pass x{" "}
+                {everything.visitors - everything.infants - everything.seniors}
+              </p>
+              <p>
+                Rs.
+                {(everything.visitors -
+                  everything.infants -
+                  everything.seniors) *
+                  500}
+              </p>
             </div>
             <div className="flex justify-between items-center ">
-              <p>Adult Pass x 3</p>
-              <p>$200</p>
+              <p>Child Pass x {everything.infants}</p>
+              <p>Rs.{everything.infants * 500}</p>
             </div>
             <div className="flex justify-between items-center ">
-              <p>Adult Pass x 3</p>
-              <p>$200</p>
+              <p>Old Age Pass x {everything.seniors}</p>
+              <p>Rs.{everything.seniors * 500}</p>
             </div>
           </section>
           <hr className="h-0 border-2 border-black" />
           <div className="flex justify-between items-center font-bold text-black ">
             <p>To Pay</p>
-            <p>$1000</p>
+            <p>Rs.{everything.amount}</p>
           </div>
           <Button color="warning" onClick={handleClick}>
             Procced to Pay

@@ -44,7 +44,7 @@ export const sendConfirmMail=async(booking,email)=>{
         from:`${process.env.AUTH_EMAIL}`,
         to:user.email,
         subject:"Confirmation: You Have Been Moved from the Waiting List",
-        Text:`Dear ${user.name},\n
+        text:`Dear ${user.name},\n
 
         We are pleased to inform you that you have been successfully moved from the waiting list to the confirmed list for Ayodhya Temple Booking. Congratulations!\n
         

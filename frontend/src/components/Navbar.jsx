@@ -1,7 +1,10 @@
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { signOutSuccess } from "../features/userSlice";
+import { bookingSuccess } from "../features/bookingSlice";
+import Logo from "../assets/Logo.png";
 
 function Navbar() {
   const user = useSelector((state) => state.user.userDetails);
@@ -9,6 +12,7 @@ function Navbar() {
   const [text, setText] = useState("Login");
   const [link, setLink] = useState("/signin");
   const navigate = useNavigate();
+  const dispath = useDispatch();
 
   useEffect(() => {
     const fn1 = () => {
@@ -27,27 +31,32 @@ function Navbar() {
     if (link === "/signin") return navigate("/signin");
     let url = "http://localhost:3000/api/auth/signout";
     const req = await fetch(url, {
-      method: "GET",
+      method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await req.json();
     if (data.error) return console.log(data.error);
+    dispath(bookingSuccess());
+    dispath(signOutSuccess());
     navigate("/");
   };
   return (
-    <div className="w-full py-8 px-2 flex justify-between md:justify-around items-center">
-      <div className="text-2xl text-white">NamasteAyodhya</div>
+    <div className="w-full py-2 flex justify-between md:justify-around items-center">
+      <div className="text-2xl text-white">
+        <img src={Logo} width={"100px"} height={"100px"} />
+      </div>
       <nav className="flex items-center justify-between gap-12 md:gap-32 ">
         <Link to={"/"} className="text-white text-xl hover:text-slate-300">
           Home
         </Link>
         <Link
-          to={"/Booking"}
+          to={"/allBookings"}
           className="text-white text-xl hover:text-slate-300"
         >
-          Booking
+          Bookings
         </Link>
         <Link
           to={"/contact"}
