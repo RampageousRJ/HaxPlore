@@ -39,8 +39,9 @@ function OAuth() {
       console.log(result);
       // Submit data for database
       try {
-        const res = await fetch("/api/v1/google", {
+        const res = await fetch("http://localhost:3000/api/auth/signup", {
           method: "POST",
+          credentials: 'include',
           headers: {
             "Content-Type": "application/json",
           },
@@ -50,22 +51,24 @@ function OAuth() {
           }),
         });
         const data = await res.json();
-        if (data.success == false) {
+        if (data.error) {
           dispatch(signInFailure());
           return setFailure(data.message);
         }
-        dispatch(signInSuccess(data.sendInfo));
+        console.log(data.userEmail);
+        dispatch(signInSuccess(data.userEmail));
       } catch (error) {
+        console.log(error);
         setFailure(error.message);
-        navigate("/");
+        navigate("/signin");
         return;
       }
     } catch (error) {
       setFailure(error.message);
-      navigate("/");
+      navigate("/signin");
       return;
     }
-    navigate("/home");
+    navigate("/");
   };
 
   return (

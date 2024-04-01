@@ -1,15 +1,32 @@
 import React from "react";
-import darshan from "../assets/Chipdarshan.svg";
-import anna from "../assets/Chipanna.svg";
-import aarti from "../assets/Chipaarti.svg";
-import wheelchair from "../assets/Chipwheelchair.svg";
+import darshanIcon from "../assets/Chipdarshan.svg";
+import annaIcon from "../assets/Chipanna.svg";
+import aartiIcon from "../assets/Chipaarti.svg";
+import wheelchairIcon from "../assets/Chipwheelchair.svg";
+import { useDispatch, useSelector } from "react-redux";
 
 const Ticket = (props) => {
-  const { date, slot, _id, visitors, infants, seniors, name, QRCode } =
-    props.details;
+  const dispatch = useDispatch();
+  const {
+    date,
+    slot,
+    _id,
+    visitors,
+    infants,
+    seniors,
+    name,
+    QRCode,
+    anna,
+    aarti,
+    darshan,
+    wheelchair,
+  } =
+    props.details ||
+    useSelector((state) => state.bookings.bookingDetails) ||
+    {};
 
   return (
-    <div className="flex flex-col rounded-lg shadow-md">
+    <div className="flex flex-col rounded-lg shadow-md min-w-96">
       <section className="bg-ticket-orange rounded-t-lg rounded-b-3xl pb-4 flex flex-col">
         <div className="w-full h-20 shadow-2xl" />
         <div className="flex flex-col gap-1 px-4 py-5">
@@ -34,7 +51,9 @@ const Ticket = (props) => {
             <h3 className="text-md font-semibold self-start text-ticket-orange">
               Booking ID
             </h3>
-            <p className="text-md font-semibold self-start">{_id}</p>
+            <p className="text-md font-semibold self-start">
+              {_id || "id after payment"}
+            </p>
           </div>
           <div className="flex flex-col gap-1 items-center">
             <h3 className="text-md font-semibold self-end text-ticket-orange">
@@ -62,17 +81,16 @@ const Ticket = (props) => {
           id="svgs"
           className="flex gap-5 py-3 justify-center flex-wrap items-center"
         >
-          <img src={darshan} alt="darshan availed confirmation" />
-          <img src={anna} alt="anna availed confirmation" />
-          <img src={aarti} alt="aarti availed confirmation" />
-          <img src={wheelchair} alt="wheelchair availed confirmation" />
+          {darshan && <img src={darshanIcon} alt="darshan availed confirmation" />}
+          {anna && <img src={annaIcon} alt="anna availed confirmation" />}
+          {aarti && <img src={aartiIcon} alt="anna availed confirmation" />}
+          {wheelchair && (
+            <img src={wheelchairIcon} alt="wheelchair availed confirmation" />
+          )}
         </section>
         <hr className="border-t border-dashed border-gray-400 h-0" />
         <section className="flex justify-between px-2 items-center py-3">
-          <img
-            src={QRCode}
-            alt="QR Code"
-          />
+          {QRCode && <img src={QRCode} alt="QR Code" />}
           <div className="flex flex-col gap-0 ">
             <h2 className="text-md text-ticket-orange ">
               Booking in the name of

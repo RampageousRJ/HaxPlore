@@ -5,23 +5,44 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import SlotAvailibilty from "../components/SlotAvailibilty";
 import { useDispatch, useSelector } from "react-redux";
+import io from "socket.io-client";
 
 function Booking() {
   const [dates, setDates] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const currDate = useSelector((state) => state.bookings.bookingDetails.date);
+  let currDate = useSelector((state) => state.bookings.bookingDetails.date);
   const number = useSelector((state) => state.bookings.bookingDetails.visitors);
 
-  const [slots, setSlots] = useState();
+  const [slots, setSlots] = useState(null);
+
+  const socket = io("http://localhost:4000"); // Adjust the URL to your server
+
+  // Inside your Booking component
+  useEffect(() => {
+    // Subscribe to the 'booking update' event
+    socket.on("booking update", (updatedBookings) => {
+      // Assuming the updatedBookings format matches what the component expects for slots
+      setSlots(updatedBookings); // Update slots with the new data
+    });
+
+    // Cleanup the effect
+    return () => {
+      socket.off("booking update");
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
   useEffect(() => {
     const generateDates = () => {
       // Convert DD-MM-YYYY to YYYY-MM-DD
       setLoading(true);
-      const [day, month, year] = currDate.split("-");
-      const formattedDate = `${year}-${month}-${day}`;
-      const date = new Date(formattedDate);
+      if (currDate.split("-")[0].length <= 2) {
+        console.log(currDate);
+        const [day, month, year] = currDate.split("-");
+        const formattedDate = `${year}-${month}-${day}`;
+        currDate = formattedDate;
+      }
+      const date = new Date(currDate);
       const nextDate = new Date(date.getTime());
       nextDate.setDate(date.getDate() + 1);
       const next2Date = new Date(date.getTime());
@@ -35,10 +56,17 @@ function Booking() {
     };
     const retrieveData = async () => {
       setLoading(true);
+      if (currDate.split("-")[0].length > 2) {
+        console.log(currDate);
+        const [year, month, day] = currDate.split("-");
+        const formattedDate = `${day}-${month}-${year}`;
+        currDate = formattedDate;
+      }
       const req = await fetch(
-        `http://localhost:3000/api/booking/getBookedSlots/${date}`,
+        `http://localhost:3000/api/booking/getBookedSlots/${currDate}`,
         {
           method: "GET",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -180,7 +208,8 @@ function Booking() {
               {slots &&
                 slots.map((item, ind) => {
                   let isAvailable = false;
-                  if (item.available - number >= 0) isAvailable = true;
+                  console.log(item.available,Number(number),item);
+                  if (50 - item.available - Number(number) >= 0) isAvailable = true;
                   return (
                     <SlotAvailibilty
                       key={ind}

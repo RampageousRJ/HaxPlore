@@ -4,7 +4,7 @@ import genTokenAndSetCookie from "../utils/generateToken.js"
 
 export const signup=async(req,res)=>{
     try {
-        const {name,email,password,confirmPassword,phone}=req.body
+        let {name,email,password,confirmPassword,phone}=req.body
         const userEmail=await User.findOne({email}).select("-password")
         const userPhone=await User.findOne({phone})
         if(userEmail || userPhone){

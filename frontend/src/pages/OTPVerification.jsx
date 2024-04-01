@@ -1,7 +1,9 @@
 import { Alert, TextField, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signInSuccess } from "../features/userSlice";
 
 function OTPVerification() {
   const [formData, setFormData] = useState(null);
@@ -9,10 +11,14 @@ function OTPVerification() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const navigate=useNavigate()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const dispatch=useDispatch()
+  const userID = useSelector(state => state?.user?.userDetails?._id ?? '');
 
   useEffect(() => {
     setError(null);
@@ -23,15 +29,15 @@ function OTPVerification() {
   const getOTP = async () => {
     console.log(formData.email);
     if (!formData.email) return;
-    const req = await fetch("http://localhost:3000/api/auth/forgotPassword", {
-      method: "POST",
+    const res = await fetch(`http://localhost:3000/api/forgot-password/send-OTP/${formData.email}`, {
+      method: "GET",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: formData.email,
-      }),
     });
+    const data=await res.json()
+    dispatch(signInSuccess({_id:data.data.userId}))
     setOTPRecieved(true);
   };
 
@@ -39,17 +45,22 @@ function OTPVerification() {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
-    console.log(formData.OTP);
-    const req = await fetch(
-      "http://localhost:3000/api/booking/newBooking/66072c68de6394ca03c34a32",
+    console.log(formData.OTP,userID);
+    const res = await fetch(
+      `http://localhost:3000/api/forgot-password/verify-OTP/${userID}`,
       {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData.OTP),
+        body: JSON.stringify({"otp":formData.OTP}),
       }
     );
+    const data=await res.json()
+    if(data.error)
+      return setError(data.error)
+    navigate("/resetPassword")
   };
 
   return (

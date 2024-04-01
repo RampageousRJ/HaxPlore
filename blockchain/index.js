@@ -6,49 +6,49 @@ const contractAddress = process.env.CONTRACT_ADDRESS;
 
 const provider = new ethers.providers.JsonRpcProvider(API_URL);
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
-const {abi} = require("./artifacts/contracts/contractApi.sol/contractApi.json");
+const { abi } = require("./artifacts/contracts/contractApi.sol/contractApi.json");
 const contractInstance = new ethers.Contract(contractAddress, abi, signer);
 
 /*const express = require('express');
 const app = express();
 app.use(express.json());
 */
-const getOneRecord=async(req, res) => {   //http://localhost:3000/records/1
+const getOneRecord = async (req, res) => {   //http://localhost:3000/records/1
     try {
         const bookingId = req.params.id;
         const record = await contractInstance.getRecord(bookingId);
-        res.status(200).json({"transactionId":record});
+        res.status(200).json({ "transactionId": record });
     }
     catch (error) {
-        res.status(500).json({"Error":error.message});
+        res.status(500).json({ "Error": error.message });
     }
 };
 
-const getRecords= async(req, res) => {   //http://localhost:3000/records/
+const getRecords = async (req, res) => {   //http://localhost:3000/records/
     try {
         const allRecords = await contractInstance.getAllRecords();
         const records = allRecords.map(record => ({
-            bookingId : parseInt(record.bookingId),
-            transactionId:parseInt(record.transactionId)
+            bookingId: record.bookingId,
+            transactionId: record.transactionId
         }))
         console.log(records)
         res.send(records);
     }
     catch (error) {
-        res.status(500).json({"Error":error.message});
+        res.status(500).json({ "Error": error.message });
     }
 };
 
 
-const storeRecord=async(req, res) => {
+const storeRecord = async (req, res) => {
     try {
-        const {bookingId,transactionId} = req.body;
-        const tx = await contractInstance.setRecord(bookingId,transactionId);
+        const { bookingId, transactionId } = req.body;
+        const tx = await contractInstance.setRecord(bookingId.trim(), transactionId.trim());
         await tx.wait();
-        res.json({success: true})
+        res.json({ success: true })
     }
     catch (error) {
-        res.status(500).json({"Error":error.message});
+        res.status(500).json({ "Error": error.message });
     }
 };
 
@@ -65,15 +65,15 @@ const storeRecord=async(req, res) => {
     }
 });*/
 
-const deleteRecord=async (req, res) => {
+const deleteRecord = async (req, res) => {
     try {
         const bookingId = req.params.id;
         const tx = await contractInstance.deleteRecord(bookingId);
         await tx.wait();
-        res.json({success: true})
+        res.json({ success: true })
     }
     catch (error) {
-        res.status(500).json({"error":error.message});
+        res.status(500).json({ "error": error.message });
     }
 };
 
@@ -82,4 +82,4 @@ app.listen(port, () => {
     console.log("API server is listening on port 3000")
 })*/
 
-module.exports={storeRecord,getOneRecord,getRecords,deleteRecord}
+module.exports = { storeRecord, getOneRecord, getRecords, deleteRecord }

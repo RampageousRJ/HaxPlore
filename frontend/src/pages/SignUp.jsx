@@ -22,8 +22,9 @@ function SignUp() {
     try {
       setFailure(null);
       setLoading(true);
-      const req = await fetch("/api/v1/signup", {
+      const req = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },

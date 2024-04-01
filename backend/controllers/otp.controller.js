@@ -96,19 +96,19 @@ export const verifyOTP=async(req,res)=>{
         }
         const userToBeVerified=await VerifiedUser.findOne({uid})
         if(userToBeVerified.length <= 0){
-            res.status(400).json({error:"Account does not exist or is already verified!",validation:"False"})
+            res.status(400).json({error:"Account does not exist or is already verified!",validation:false})
         }
         const {expiresAt}=userToBeVerified
         const hashedOTP=userToBeVerified.otp
         if(expiresAt<Date.now()){
             await VerifiedUser.deleteMany({uid})
-            res.status(400).json({error:"OTP has expired! Please request again.",validation:"False"})
+            res.status(400).json({error:"OTP has expired! Please request again.",validation:false})
         }
         const isValid=bcrypt.compare(otp,hashedOTP)
         if(!isValid){
-            res.status(400).json({error:"Invalid OTP",validation:"False"})
+            res.status(400).json({error:"Invalid OTP",validation:false})
         }
-        res.status(200).json({message:"OTP Verification Successful!",validation:"True",data:{userId:uid,email:userToBeVerified.email}})
+        res.status(200).json({message:"OTP Verification Successful!",validation:true,data:{userId:uid,email:userToBeVerified.email}})
         await VerifiedUser.deleteMany({uid})
     }catch(error){
         console.log("Error in verifyOTP:",error.message)
