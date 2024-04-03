@@ -20,6 +20,9 @@ import {
 
 function Home() {
   const ref = useRef(null);
+  const myRef = useRef(null);
+  const scrollToRef = () => myRef.current?.scrollIntoView({ behavior: 'smooth' });
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -28,7 +31,7 @@ function Home() {
   const x = useTransform(scrollYProgress, [0, 1], [0, -100]);
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <HeroSection />
+      <HeroSection scrollIntoView={scrollToRef} />
       <section className="min-h-screen w-full bg-main-light-orange flex flex-col gap-16">
         <section
           ref={ref}
@@ -51,6 +54,7 @@ function Home() {
       <footer
         className="flex flex-col gap-6 w-full p-10"
         style={{ color: "#4A2800", fontSize:"1.05rem", fontWeight:"600" }}
+        ref={myRef}
       >
         <section className="flex justify-between">
           <div className="flex flex-col gap-2">

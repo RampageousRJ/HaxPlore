@@ -34,7 +34,7 @@ function BookingForm() {
     e.preventDefault();
     console.log(formData);
     dispatch(bookingDetailsUpdate(formData));
-    navigate("/booking")
+    navigate("/booking");
   };
   return (
     <form
@@ -107,6 +107,9 @@ function BookingForm() {
             value={formData?.date || ""}
             required
             onChange={handleChange}
+            sx={{
+              color: "#BB3B3B",
+            }}
           />
         </ThemeProvider>
       </div>
