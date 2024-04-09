@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOutSuccess } from "../features/userSlice";
 import { bookingSuccess } from "../features/bookingSlice";
 import Logo from "../assets/Logo.png";
+import toast from 'react-hot-toast'
 
 function Navbar() {
   const user = useSelector((state) => state.user.userDetails);
@@ -38,9 +39,13 @@ function Navbar() {
       },
     });
     const data = await req.json();
-    if (data.error) return console.log(data.error);
+    if (data.error) {
+      toast.error("Error in Logout")
+      return console.log(data.error);
+    }
     dispath(bookingSuccess());
     dispath(signOutSuccess());
+    toast.success("Logged Out Successfully")
     navigate("/");
   };
   return (

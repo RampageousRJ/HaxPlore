@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,5 +9,28 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+        composerPlaceholder: "Chat with ChatBhakt",
+        botConversationDescription: "Namaste-Ayodhya ChatBhakt",
+        botId: "ccbf9f44-fcb8-4ce8-bb17-aac2e5642a4b",
+        hostUrl: "https://cdn.botpress.cloud/webchat/v1",
+        messagingUrl: "https://messaging.botpress.cloud",
+        clientId: "ccbf9f44-fcb8-4ce8-bb17-aac2e5642a4b",
+        webhookId: "ffd92a20-b7b8-4cf5-998e-dc978fc7b54a",
+        lazySocket: true,
+        themeName: "prism",
+        botName: "ChatBhakt",
+        avatarUrl:
+          "https://live.staticflickr.com/65535/53624785670_e5b92bfc8f_t.jpg",
+        stylesheet:
+          "https://webchat-styler-cshttps://webchat-styler-css.botpress.app/prod/ed62cd22-fe97-4462-a2a0-988a0fa91b7f/v99877/style.css",
+        frontendVersion: "v1",
+        useSessionStorage: true,
+        theme: "prism",
+        themeColor: "#2563eb",
+      });
+    </script>
   </body>
 </html>
