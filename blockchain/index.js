@@ -16,7 +16,7 @@ app.use(express.json());
 const getOneRecord = async (req, res) => {   //http://localhost:3000/records/1
     try {
         const bookingId = req.params.id;
-        const record = await contractInstance.getRecord(bookingId, { gasLimit: 1 * 10 ** 6 });
+        const record = await contractInstance.getRecord(bookingId);
         res.status(200).json({ "transactionId": record });
     }
     catch (error) {
@@ -43,7 +43,7 @@ const getRecords = async (req, res) => {   //http://localhost:3000/records/
 const storeRecord = async (req, res) => {
     try {
         const { bookingId, transactionId } = req.body;
-        const tx = await contractInstance.setRecord(bookingId.trim(), transactionId.trim(),{ gasLimit: 3 * 10 ** 4 });
+        const tx = await contractInstance.setRecord(bookingId, transactionId);
         await tx.wait();
         res.json({ success: true })
     }
