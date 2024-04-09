@@ -5,8 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOutSuccess } from "../features/userSlice";
 import { bookingSuccess } from "../features/bookingSlice";
 import Logo from "../assets/Logo.png";
+import toast from 'react-hot-toast'
 
-function Navbar() {
+function Navbar(props) {
+
+  const scrollIntoView = props.scrollIntoView;
   const user = useSelector((state) => state.user.userDetails);
 
   const [text, setText] = useState("Login");
@@ -38,9 +41,13 @@ function Navbar() {
       },
     });
     const data = await req.json();
-    if (data.error) return console.log(data.error);
+    if (data.error) {
+      toast.error("Error in Logout")
+      return console.log(data.error);
+    }
     dispath(bookingSuccess());
     dispath(signOutSuccess());
+    toast.success("Logged Out Successfully")
     navigate("/");
   };
   return (
@@ -59,7 +66,7 @@ function Navbar() {
           Bookings
         </Link>
         <Link
-          to={"/contact"}
+          onClick={() => scrollIntoView()}
           className="text-white text-xl hover:text-slate-300"
         >
           Contact Us

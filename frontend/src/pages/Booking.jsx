@@ -6,38 +6,59 @@ import { IoIosArrowForward } from "react-icons/io";
 import SlotAvailibilty from "../components/SlotAvailibilty";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { useSocketContext } from "../context/SocketContext";
 
 function Booking() {
   const [dates, setDates] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [date, setDate] = useState(null);
+  const {socket}=useSocketContext()
+  const [change,setChange]=useState('false')
   let currDate = useSelector((state) => state.bookings.bookingDetails.date);
   const number = useSelector((state) => state.bookings.bookingDetails.visitors);
 
   const [slots, setSlots] = useState(null);
-
-  const socket = io("http://localhost:4000"); // Adjust the URL to your server
-
-  // Inside your Booking component
   useEffect(() => {
-    // Subscribe to the 'booking update' event
-    socket.on("booking update", (updatedBookings) => {
-      // Assuming the updatedBookings format matches what the component expects for slots
-      setSlots(updatedBookings); // Update slots with the new data
-    });
+    console.log(socket)
+    let cDate=''
+    let m_date=new Date(date)
+      console.log('ndate:',m_date)
+      const day = m_date.getDate();
+      const month = m_date.getMonth() + 1; // Months are zero-based, so we add 1
+      const year = m_date.getFullYear();
 
-    // Cleanup the effect
-    return () => {
-      socket.off("booking update");
-    };
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+      // Pad day and month with leading zeros if necessary
+      const formattedDay = String(day).padStart(2, '0');
+      const formattedMonth = String(month).padStart(2, '0');
+
+      // Format the date string as dd-mm-yyyy
+      const p_Date = `${formattedDay}-${formattedMonth}-${year}`;
+      console.log('pDate:',p_Date)
+    socket?.on("updatedBooking",(currentBooking)=>{
+      /*if (p_Date.split("-")[0].length > 2) {
+        // console.log(currDate);
+        const [day, month, year] = p_Date.split("-");
+        const formattedDate = `${year}-${month}-${day}`;
+        cDate = formattedDate;
+      }else{
+        cDate=p_Date
+      }*/
+      console.log('Compare',p_Date,currentBooking.date)
+      if(p_Date===currentBooking.date){
+        console.log('Message Received!')
+        console.log("socket:",currentBooking)
+        setChange((prev)=>!prev)
+      }
+    })
+    return ()=>socket?.off('updatedBooking')
+  }, [socket,slots,setSlots,date]); 
 
   useEffect(() => {
     const generateDates = () => {
       // Convert DD-MM-YYYY to YYYY-MM-DD
       setLoading(true);
       if (currDate.split("-")[0].length <= 2) {
-        console.log(currDate);
+        // console.log(currDate);
         const [day, month, year] = currDate.split("-");
         const formattedDate = `${year}-${month}-${day}`;
         currDate = formattedDate;
@@ -54,16 +75,41 @@ function Booking() {
       setDates([prev2Date, prevDate, date, nextDate, next2Date]);
       setLoading(false);
     };
+    const setFirstTime = () => {
+      console.log(currDate);
+      setDate(currDate);
+    };
+    if (currDate) {
+      generateDates();
+      setFirstTime();
+    }
+  }, [currDate]);
+
+  useEffect(() => {
     const retrieveData = async () => {
       setLoading(true);
       if (currDate.split("-")[0].length > 2) {
-        console.log(currDate);
+        // console.log(currDate);
         const [year, month, day] = currDate.split("-");
         const formattedDate = `${day}-${month}-${year}`;
         currDate = formattedDate;
       }
+      console.log(date);
+      let n_date=new Date(date)
+      console.log('ndate:',n_date)
+      const day = n_date.getDate();
+      const month = n_date.getMonth() + 1; // Months are zero-based, so we add 1
+      const year = n_date.getFullYear();
+
+      // Pad day and month with leading zeros if necessary
+      const formattedDay = String(day).padStart(2, '0');
+      const formattedMonth = String(month).padStart(2, '0');
+
+      // Format the date string as dd-mm-yyyy
+      const passDate = `${formattedDay}-${formattedMonth}-${year}`;
+      console.log('pass:',passDate)
       const req = await fetch(
-        `http://localhost:3000/api/booking/getBookedSlots/${currDate}`,
+        `http://localhost:3000/api/booking/getBookedSlots/${passDate}`,
         {
           method: "GET",
           credentials: "include",
@@ -73,15 +119,13 @@ function Booking() {
         }
       );
       const data = await req.json();
+      console.log(data);
       setSlots(data);
       setLoading(false);
     };
-
-    if (currDate) {
-      generateDates();
-      retrieveData();
-    }
-  }, [currDate]);
+    if(date)
+      retrieveData()
+  }, [date,change,setChange]);
 
   const [active, setActive] = useState(2);
 
@@ -176,7 +220,10 @@ function Booking() {
                     color: textcolor,
                     backgroundColor: backgroundColor,
                   }}
-                  onClick={() => setActive(ind)}
+                  onClick={() => {
+                    setDate(dates[ind]);
+                    setActive(ind);
+                  }}
                 >
                   <i>{day}</i>
                   <strong>{date}</strong>
@@ -208,8 +255,9 @@ function Booking() {
               {slots &&
                 slots.map((item, ind) => {
                   let isAvailable = false;
-                  console.log(item.available,Number(number),item);
-                  if (50 - item.available - Number(number) >= 0) isAvailable = true;
+                  // console.log(item.available, Number(number), item);
+                  if (20 - item.available - Number(number) >= 0)
+                    isAvailable = true;
                   return (
                     <SlotAvailibilty
                       key={ind}

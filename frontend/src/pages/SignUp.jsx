@@ -3,6 +3,7 @@ import { Button, TextField } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import toast from "react-hot-toast";
 
 function SignUp() {
   // For form of custom signup
@@ -20,30 +21,29 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setFailure(null);
       setLoading(true);
       const req = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
-        credentials: 'include',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData), // HTTP only handles text data
       });
       const data = await req.json();
-      if (data.error)
-        return setFailure(data.error);
+      if (data.error) return toast.error(data.error);
     } catch (e) {
-      setFailure(e);
+      toast.error(e);
     }
     setFormData(null);
     setLoading(false);
+    toast.success("Successfully Registered. Kindly Sign In to continue!");
     navigate("/signin");
   };
 
   const handleChange = (e) => {
     const input = e.target.id || e.target.name;
-    const val = e.target.value.trim(); //.trim() to get rid of useless white spaces at start
+    const val = e.target.value
     const temp = { ...formData, [input]: val };
     setFormData(temp);
   };
@@ -72,7 +72,7 @@ function SignUp() {
             sx={{
               width: "300px",
             }}
-            value={formData?.name || ''}
+            value={formData?.name || ""}
             required
             onChange={handleChange}
           />
@@ -127,7 +127,12 @@ function SignUp() {
           {/* Sign up Button */}
 
           {!loading && (
-            <Button variant="contained" type="submit" color="warning" disabled={loading}>
+            <Button
+              variant="contained"
+              type="submit"
+              color="warning"
+              disabled={loading}
+            >
               SIGN UP
             </Button>
           )}

@@ -9,6 +9,7 @@ import Ticket from "../components/Ticket";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { GiConfirmed } from "react-icons/gi";
+import toast from "react-hot-toast";
 
 function Bookings() {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,7 @@ function Bookings() {
   const userId = useSelector((state) => state.user.userDetails._id);
   const [showTicket, setShowTicket] = useState(false);
   const [removed, setRemoved] = useState(null);
+  const [processRemoval,setProcessRemoval]=useState(false)
   const [result, setResult] = useState([
     {
       name: "Swapnil",
@@ -47,7 +49,7 @@ function Bookings() {
       setLoading(false);
     };
     if (userId) fetchDetails();
-  }, [userId]);
+  }, [userId,processRemoval]);
 
   const view = async (id) => {
     console.log(id);
@@ -94,10 +96,10 @@ function Bookings() {
       }
     );
     const data2 = await req2.json();
-    if (data2.error) console.log(data2.error);
+    if (data2.error) return toast.error(data2.error);
     setRemoved(data2.transactionId);
-
-    navigate("/allBookings");
+    toast.success("Successfully removed ticket for ",data2.transactionId);
+    setProcessRemoval((prev)=>!prev);
   };
 
   const handleClose = () => {
