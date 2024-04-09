@@ -58,7 +58,7 @@ function Booking() {
         const formattedDate = `${day}-${month}-${year}`;
         currDate = formattedDate;
       }
-      console.log(date);
+      // console.log(date);
       const req = await fetch(
         `http://localhost:3000/api/booking/getBookedSlots/${date}`,
         {
