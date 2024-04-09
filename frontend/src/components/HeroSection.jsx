@@ -4,7 +4,9 @@ import mandir from "../assets/Mandir.svg";
 import mandala from "../assets/mandala.svg";
 import { animate, motion } from "framer-motion";
 
-function HeroSection() {
+function HeroSection(props) {
+
+  const scrollIntoView=props.scrollIntoView
   return (
     <main className=" bg-custom-gradient w-full h-screen relative overflow-hidden">
       <div className="w-full flex justify-center absolute top-48">
@@ -21,7 +23,7 @@ function HeroSection() {
           }}
         />
       </div>
-      <Navbar />
+      <Navbar scrollIntoView={scrollIntoView} />
       <div className="w-full h-2/3 flex">
         <h2 className="text-4xl text-white m-auto">
           SHRI RAM JANMABHOOMI MANDIR, AYODHYA

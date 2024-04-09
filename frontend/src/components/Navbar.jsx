@@ -7,7 +7,9 @@ import { bookingSuccess } from "../features/bookingSlice";
 import Logo from "../assets/Logo.png";
 import toast from 'react-hot-toast'
 
-function Navbar() {
+function Navbar(props) {
+
+  const scrollIntoView = props.scrollIntoView;
   const user = useSelector((state) => state.user.userDetails);
 
   const [text, setText] = useState("Login");
@@ -64,7 +66,7 @@ function Navbar() {
           Bookings
         </Link>
         <Link
-          to={"/contact"}
+          onClick={() => scrollIntoView()}
           className="text-white text-xl hover:text-slate-300"
         >
           Contact Us
