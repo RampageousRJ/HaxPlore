@@ -9,12 +9,16 @@ const waitlistSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    pendingBookings: [
-        {
+    pendingBookings: [{
+        bookings:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Booking"
+        },
+        attendees:{
+            type:Number,
+            required:true,
         }
-    ]
+    }]
 }, { timestamps: true }
 )
 

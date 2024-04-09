@@ -10,9 +10,9 @@ import {
 } from "../features/userSlice.js";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function OAuth() {
-  const [failure, setFailure] = useState(null);
   // For navigation
   const navigate = useNavigate();
 
@@ -36,7 +36,6 @@ function OAuth() {
     try {
       dispatch(signInStart());
       const result = await signInWithPopup(auth, provider);
-      console.log(result);
       // Submit data for database
       try {
         const res = await fetch("http://localhost:3000/api/auth/signup", {
@@ -53,21 +52,22 @@ function OAuth() {
         const data = await res.json();
         if (data.error) {
           dispatch(signInFailure());
-          return setFailure(data.message);
+          return toast.error(data.message);
         }
         console.log(data.userEmail);
         dispatch(signInSuccess(data.userEmail));
       } catch (error) {
         console.log(error);
-        setFailure(error.message);
+        toast.error(error.message);
         navigate("/signin");
         return;
       }
     } catch (error) {
-      setFailure(error.message);
+      toast.error(error.message);
       navigate("/signin");
       return;
     }
+    toast.success("Signed in successfully!");
     navigate("/");
   };
 

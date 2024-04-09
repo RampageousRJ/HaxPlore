@@ -10,6 +10,7 @@ import {
   signInSuccess,
 } from "../features/userSlice.js";
 import OAuth from "../components/OAuth";
+import toast from "react-hot-toast";
 
 function SignIn() {
   useEffect(() => {
@@ -28,26 +29,28 @@ function SignIn() {
       dispatch(signInStart());
       const req = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
-        credentials: 'include',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData), // HTTP only handles text data
       });
       const data = await req.json();
-      console.log(data.user);
       if (data.error) {
-        return dispatch(signInFailure(data.error));
-      } 
-      else {
+        dispatch(signInFailure(data.error));
+        toast.error(data.error);
+        return;
+      } else {
         dispatch(signInSuccess(data.user));
         setFormData(null);
+        toast.success("Successfull Sign In");
         navigate("/");
         return;
       }
     } catch (e) {
       setFormData(null);
-      dispatch(signInFailure(e.message));
+      dispatch(signInFailure(e));
+      toast.error(e);
       navigate("/");
       return;
     }
@@ -128,18 +131,6 @@ function SignIn() {
             Reset Password
           </Link>
         </p>
-
-        {/* Alert Section */}
-        {userState.error && (
-          <Alert
-            severity="error"
-            sx={{
-              marginTop: "1.12rem",
-            }}
-          >
-            {userState.error}
-          </Alert>
-        )}
       </div>
     </div>
   );
