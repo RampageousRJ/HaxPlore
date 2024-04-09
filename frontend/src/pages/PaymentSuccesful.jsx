@@ -50,7 +50,10 @@ function PaymentSuccesful() {
         }),
       });
       const res = await req.json();
-      console.log(res);
+      if(res.error)
+        toast.error("Could not submit to Blockchain")
+      if(res.success)
+        toast.success("Transaction Submitted Successfully to blockchain")
       navigate("/")
     };
     if (bookingID) saveInBlockChain();

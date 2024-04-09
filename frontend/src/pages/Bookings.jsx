@@ -16,7 +16,6 @@ function Bookings() {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user.userDetails._id);
   const [showTicket, setShowTicket] = useState(false);
-  const [removed, setRemoved] = useState(null);
   const [processRemoval,setProcessRemoval]=useState(false)
   const [result, setResult] = useState([
     {
@@ -97,8 +96,8 @@ function Bookings() {
     );
     const data2 = await req2.json();
     if (data2.error) return toast.error(data2.error);
-    setRemoved(data2.transactionId);
-    toast.success("Successfully removed ticket for ",data2.transactionId);
+    console.log(data2);
+    toast.success(`${data2.transactionId} Refunded`);
     setProcessRemoval((prev)=>!prev);
   };
 
@@ -180,11 +179,6 @@ function Bookings() {
       >
         Go Back
       </Button>
-      {removed && (
-        <h1 className="mt-4 text-2xl bg-orange-800">
-          Refund Processed for Transaction ID: {removed} <GiConfirmed />{" "}
-        </h1>
-      )}
     </div>
   );
 }
