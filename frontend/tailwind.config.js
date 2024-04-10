@@ -17,7 +17,8 @@ export default {
         "main-btn": "#FD9B6C",
         "main-light-orange": "#FFF3E3",
         "orange-form-bg": "#FFF4E5",
-        "ticket-orange": "#FF8900"
+        "ticket-orange": "#FF8900",
+        'glass-effect': 'rgba( 255, 255, 255, 0.25 )'
       },
       colors: {
         "available": "#34C90E",
@@ -35,9 +36,13 @@ export default {
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(to bottom, #E54717, #F57A42 25%, #F1AB3C 50%, #FBD38D 75%)',
+        'custom-gradient-mobile': 'linear-gradient(to bottom, #B53D00, #C05417 25%, #CA6A2F 50%, #D17F47 75%, #D89B60 90%, #E0B074)'
       },
       boxShadow: {
         'custom-orange': '0 4px 6px -1px rgba(255, 160, 122, 0.5), 0 2px 4px -2px rgba(255, 160, 122, 0.5)' // Custom light orange box shadow
+      },
+      backdropBlur: {
+        'glass-effect': '3.5px',
       }
     },
   },

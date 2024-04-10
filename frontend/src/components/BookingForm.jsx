@@ -41,7 +41,7 @@ function BookingForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-12 border-2 border-orange-400 rounded-2xl p-12 bg-orange-form-bg"
     >
-      <div className=" grid grid-cols-2 grid-rows-3 gap-10">
+      <div className=" grid md:grid-cols-2 grid-rows-3 gap-10">
         <ThemeProvider theme={theme}>
           <TextField
             color="warning"
