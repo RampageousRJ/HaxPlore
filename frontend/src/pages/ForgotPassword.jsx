@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutSuccess } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function ForgotPassword() {
   const [formData, setFormData] = useState(null);
@@ -26,7 +27,6 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
     if (formData.newPassword !== formData.confirmPassword)
       return setError("Passwords do not match");
@@ -46,10 +46,9 @@ function ForgotPassword() {
       }
     );
     const data = await res.json();
-    if (data.error) return console.log(data.error);
-    dispatch(signOutSuccess());
+    if (data.error) return toast.error(data.error);
+    toast.success("Password Successfully Reset");
     navigate("/signin");
-    nav;
   };
 
   return (

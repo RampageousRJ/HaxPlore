@@ -9,13 +9,14 @@ import Ticket from "../components/Ticket";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { GiConfirmed } from "react-icons/gi";
+import toast from "react-hot-toast";
 
 function Bookings() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user.userDetails._id);
   const [showTicket, setShowTicket] = useState(false);
-  const [removed, setRemoved] = useState(null);
+  const [processRemoval,setProcessRemoval]=useState(false)
   const [result, setResult] = useState([
     {
       name: "Swapnil",
@@ -47,7 +48,7 @@ function Bookings() {
       setLoading(false);
     };
     if (userId) fetchDetails();
-  }, [userId]);
+  }, [userId,processRemoval]);
 
   const view = async (id) => {
     console.log(id);
@@ -94,10 +95,10 @@ function Bookings() {
       }
     );
     const data2 = await req2.json();
-    if (data2.error) console.log(data2.error);
-    setRemoved(data2.transactionId);
-
-    navigate("/allBookings");
+    if (data2.error) return toast.error(data2.error);
+    console.log(data2);
+    toast.success(`${data2.transactionId} Refunded`);
+    setProcessRemoval((prev)=>!prev);
   };
 
   const handleClose = () => {
@@ -178,11 +179,6 @@ function Bookings() {
       >
         Go Back
       </Button>
-      {removed && (
-        <h1 className="mt-4 text-2xl bg-orange-800">
-          Refund Processed for Transaction ID: {removed} <GiConfirmed />{" "}
-        </h1>
-      )}
     </div>
   );
 }

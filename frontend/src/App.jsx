@@ -28,7 +28,7 @@ function App() {
         <Route path="/donePayment" element={<PaymentSuccessful />} />
         <Route path="/failedPayment" element={<PaymentFailure />} />
       </Routes>
-      <ChatBot />
+      {/*<ChatBot />*/}
     </Router>
   );
 }
