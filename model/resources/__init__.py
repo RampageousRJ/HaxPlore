@@ -28,7 +28,7 @@ def book_handler(payload):
     return '''Proceed to /booking -> Ensure you are logged in -> Provide necessary details -> Click 'BOOK NOW' -> proceed to the payment gateway -> Once payment is confirmed, you can access your booked ticket at /get-booking.'''
 
 def cancel_handler(payload):
-    return "Ensure you are logged in -> Navigate to 'VIEW BOOKINGS' tab -> Click 'CANCEL' -> proceed to the payment gateway -> Once payment is confirmed, you can access your booked ticket at /get-booking."
+    return "Ensure you are logged in -> Navigate to 'VIEW BOOKINGS' tab -> Click on the trash icon and confirm the cancellation"
 
 def available_handler(payload):
     date = payload['queryResult']['parameters']['date-time']
