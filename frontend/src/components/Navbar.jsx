@@ -8,6 +8,7 @@ import Logo from "../assets/Logo.png";
 import toast from "react-hot-toast";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 function Navbar(props) {
   const scrollIntoView = props.scrollIntoView;
@@ -91,34 +92,40 @@ function Navbar(props) {
         onClick={() => setOpenNavbar((prev) => !prev)}
       />
       {openNavbar && (
-        <>
-          <div className=" md:hidden bg-glass-effect backdrop-blur-glass-effect shadow-xl rounded-lg pb-6 px-10 absolute right-4 top-20">
-            <IoCloseOutline
-              className="text-2xl text-white cursor-pointer relative left-20 top-2"
-              onClick={() => setOpenNavbar((prev) => !prev)}
-            />
-            <nav className="flex flex-col items-center justify-between gap-7">
-              <Link
-                to={"/"}
-                className="text-white md:text-xl hover:text-slate-300"
-              >
-                Home
-              </Link>
-              <Link
-                to={"/allBookings"}
-                className="text-white md:text-xl hover:text-slate-300"
-              >
-                Bookings
-              </Link>
-              <Link
-                onClick={() => scrollIntoView()}
-                className="text-white md:text-xl hover:text-slate-300"
-              >
-                Contact Us
-              </Link>
-            </nav>
-          </div>
-        </>
+        <motion.div
+          initial={{ opacity: 0, scaleY: 0 }}
+          animate={{ opacity: 1, scaleY: 1 }}
+          transition={{ duration: 0.3 }}
+          className=" md:hidden bg-glass-effect dropdown-effect backdrop-blur-glass-effect shadow-xl rounded-lg pb-6 px-10 absolute right-4 top-20"
+        >
+          <IoCloseOutline
+            className="text-2xl text-white cursor-pointer relative left-20 top-2"
+            onClick={() => setOpenNavbar((prev) => !prev)}
+          />
+          <nav
+            // variants={contentVariants}
+            className="flex flex-col items-center justify-between gap-7"
+          >
+            <Link
+              to={"/"}
+              className="text-white md:text-xl hover:text-slate-300"
+            >
+              Home
+            </Link>
+            <Link
+              to={"/allBookings"}
+              className="text-white md:text-xl hover:text-slate-300"
+            >
+              Bookings
+            </Link>
+            <Link
+              onClick={() => scrollIntoView()}
+              className="text-white md:text-xl hover:text-slate-300"
+            >
+              Contact Us
+            </Link>
+          </nav>
+        </motion.div>
       )}
     </div>
   );

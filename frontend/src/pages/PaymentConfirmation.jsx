@@ -106,7 +106,7 @@ function PaymentConfirmation() {
           </h1>
         </div>
         <section
-          className="flex py-10 px-48 justify-center gap-40 items-center"
+          className="flex flex-col md:flex-row py-10 px-48 justify-center gap-40 items-center"
           style={{ backgroundColor: "#F3F2F3 " }}
         >
           <Ticket />

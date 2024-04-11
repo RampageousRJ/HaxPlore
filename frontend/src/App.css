@@ -3,3 +3,6 @@
   font-weight: 400;
   font-style: normal;
 }
+.dropdown-effect {
+  transform-origin: top;
+}
