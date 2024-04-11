@@ -186,7 +186,7 @@ function Booking() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-scroll">
       <div className="w-full border-b-2 relative">
         <img src={bookingSvg} alt="" className="w-full h-24" />
         <h1
@@ -200,7 +200,7 @@ function Booking() {
         id="date-section"
         className=" py-4 flex justify-center items-center"
       >
-        <div className="w-1/4 flex gap-4 items-center justify-center">
+        <div className="w-full flex gap-1 md:gap-4 items-center justify-center">
           <IoIosArrowBack
             cursor={"pointer"}
             size={"40px"}
@@ -241,7 +241,7 @@ function Booking() {
       </section>
       {/* Section to show availibilities */}
       <section
-        className="w-full flex justify-center items-center p-10 "
+        className="w-full flex xl:justify-center xl:items-center p-10 overflow-x-scroll text-sm "
         style={{ backgroundColor: "#F3F2F3" }}
       >
         <div className="bg-white text-sm">

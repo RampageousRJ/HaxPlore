@@ -11,6 +11,7 @@ import PaymentConfirmation from "./pages/PaymentConfirmation";
 import PaymentSuccessful from "./pages/PaymentSuccesful";
 import PaymentFailure from "./pages/PaymentFailed";
 import ChatBot from "./pages/ChatBot";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -21,12 +22,14 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/resetPassword" element={<ForgotPassword />} />
         <Route path="/otpVerification" element={<OTPVerification />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/allBookings" element={<Bookings />} />
-        <Route path="/payementDetails" element={<PaymentConfirmation />} />
         <Route path="/chatbot" element={<ChatBot />} />
         <Route path="/donePayment" element={<PaymentSuccessful />} />
         <Route path="/failedPayment" element={<PaymentFailure />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/allBookings" element={<Bookings />} />
+          <Route path="/paymentDetails" element={<PaymentConfirmation />} />
+        </Route>
       </Routes>
       {/*<ChatBot />*/}
     </Router>
