@@ -6,16 +6,52 @@ import { IoIosArrowForward } from "react-icons/io";
 import SlotAvailibilty from "../components/SlotAvailibilty";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { useSocketContext } from "../context/SocketContext";
 
 function Booking() {
   const [dates, setDates] = useState(null);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(null);
-
+  const {socket}=useSocketContext()
+  const [change,setChange]=useState('false')
   let currDate = useSelector((state) => state.bookings.bookingDetails.date);
   const number = useSelector((state) => state.bookings.bookingDetails.visitors);
 
   const [slots, setSlots] = useState(null);
+  useEffect(() => {
+    console.log(socket)
+    let cDate=''
+    let m_date=new Date(date)
+      console.log('ndate:',m_date)
+      const day = m_date.getDate();
+      const month = m_date.getMonth() + 1; // Months are zero-based, so we add 1
+      const year = m_date.getFullYear();
+
+      // Pad day and month with leading zeros if necessary
+      const formattedDay = String(day).padStart(2, '0');
+      const formattedMonth = String(month).padStart(2, '0');
+
+      // Format the date string as dd-mm-yyyy
+      const p_Date = `${formattedDay}-${formattedMonth}-${year}`;
+      console.log('pDate:',p_Date)
+    socket?.on("updatedBooking",(currentBooking)=>{
+      /*if (p_Date.split("-")[0].length > 2) {
+        // console.log(currDate);
+        const [day, month, year] = p_Date.split("-");
+        const formattedDate = `${year}-${month}-${day}`;
+        cDate = formattedDate;
+      }else{
+        cDate=p_Date
+      }*/
+      console.log('Compare',p_Date,currentBooking.date)
+      if(p_Date===currentBooking.date){
+        console.log('Message Received!')
+        console.log("socket:",currentBooking)
+        setChange((prev)=>!prev)
+      }
+    })
+    return ()=>socket?.off('updatedBooking')
+  }, [socket,slots,setSlots,date]); 
 
   useEffect(() => {
     const generateDates = () => {
@@ -58,9 +94,22 @@ function Booking() {
         const formattedDate = `${day}-${month}-${year}`;
         currDate = formattedDate;
       }
-      // console.log(date);
+      console.log(date);
+      let n_date=new Date(date)
+      console.log('ndate:',n_date)
+      const day = n_date.getDate();
+      const month = n_date.getMonth() + 1; // Months are zero-based, so we add 1
+      const year = n_date.getFullYear();
+
+      // Pad day and month with leading zeros if necessary
+      const formattedDay = String(day).padStart(2, '0');
+      const formattedMonth = String(month).padStart(2, '0');
+
+      // Format the date string as dd-mm-yyyy
+      const passDate = `${formattedDay}-${formattedMonth}-${year}`;
+      console.log('pass:',passDate)
       const req = await fetch(
-        `http://localhost:3000/api/booking/getBookedSlots/${date}`,
+        `http://localhost:3000/api/booking/getBookedSlots/${passDate}`,
         {
           method: "GET",
           credentials: "include",
@@ -76,7 +125,7 @@ function Booking() {
     };
     if(date)
       retrieveData()
-  }, [date]);
+  }, [date,change,setChange]);
 
   const [active, setActive] = useState(2);
 
@@ -137,7 +186,7 @@ function Booking() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-scroll">
       <div className="w-full border-b-2 relative">
         <img src={bookingSvg} alt="" className="w-full h-24" />
         <h1
@@ -151,7 +200,7 @@ function Booking() {
         id="date-section"
         className=" py-4 flex justify-center items-center"
       >
-        <div className="w-1/4 flex gap-4 items-center justify-center">
+        <div className="w-full flex gap-1 md:gap-4 items-center justify-center">
           <IoIosArrowBack
             cursor={"pointer"}
             size={"40px"}
@@ -192,7 +241,7 @@ function Booking() {
       </section>
       {/* Section to show availibilities */}
       <section
-        className="w-full flex justify-center items-center p-10 "
+        className="w-full flex xl:justify-center xl:items-center p-10 overflow-x-scroll text-sm "
         style={{ backgroundColor: "#F3F2F3" }}
       >
         <div className="bg-white text-sm">
@@ -207,7 +256,7 @@ function Booking() {
                 slots.map((item, ind) => {
                   let isAvailable = false;
                   // console.log(item.available, Number(number), item);
-                  if (50 - item.available - Number(number) >= 0)
+                  if (20 - item.available - Number(number) >= 0)
                     isAvailable = true;
                   return (
                     <SlotAvailibilty

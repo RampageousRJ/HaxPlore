@@ -31,7 +31,7 @@ function App() {
           <Route path="/paymentDetails" element={<PaymentConfirmation />} />
         </Route>
       </Routes>
-      <ChatBot />
+      {/*<ChatBot />*/}
     </Router>
   );
 }

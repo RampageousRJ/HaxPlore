@@ -3,7 +3,9 @@ import qr from 'qrcode'
 import Waitlist from '../models/waitlistModel.js';
 import { sendConfirmMail } from '../utils/sendConfirmationMail.js';
 import User from '../models/userModel.js';
-import io from '../index.js'
+import { io } from '../socket/socket.js';
+//import io from '../index.js'
+
 
 export const newBooking = async (req, res) => {
 
@@ -52,17 +54,26 @@ export const newBooking = async (req, res) => {
         const currentBooking = await Booking.findOneAndUpdate({ _id: newBooking._id }, { QRCode: QRCode }, { new: true })
         if (currentBooking) {
             await currentBooking.save();
+            io.emit("updatedBooking",currentBooking)
+            //socket send here
             if (!currentBooking.isConfirmed) {
                 const waitRecord = await Waitlist.findOne({ $and: [{ date: currentBooking.date }, { slot: currentBooking.slot }] })
                 if (!waitRecord) {
                     const newWaitRec = await Waitlist.create({
                         date: currentBooking.date,
                         slot: currentBooking.slot,
-                        pendingBookings: [currentBooking._id,]
+                        pendingBookings: [{bookings:currentBooking._id,attendees:currentBooking.visitors}]
                     })
                 } else {
                     console.log(waitRecord.pendingBookings)
-                    waitRecord.pendingBookings.push(currentBooking._id)
+                    waitRecord.pendingBookings.push({bookings:currentBooking._id,attendees:currentBooking.visitors})
+                    console.log(waitRecord.pendingBookings)
+                    waitRecord.pendingBookings.sort((dict1, dict2) => {
+                        const sortKey1 = dict1.attendees;
+                        const sortKey2 = dict2.attendees;
+                        return sortKey1 - sortKey2;
+                    });
+                    console.log(waitRecord.pendingBookings)
                     await waitRecord.save()
                 }
             }
@@ -101,17 +112,29 @@ export const removeBooking = async (req, res) => {
                 const waitlist = await Waitlist.findOne({ $and: [{ date: cancelledBooking.date }, { slot: cancelledBooking.slot }] })
                 if (waitlist?.pendingBookings?.length > 0) {
                     const waitBooks = waitlist.pendingBookings
-                    console.log(waitBooks)
-                    const selectedBooking = waitBooks.shift()
-                    //  console.log(selectedBooking)
-                    console.log(waitBooks)
-                    const updatedBooks = await Waitlist.updateOne({ $and: [{ date: cancelledBooking.date }, { slot: cancelledBooking.slot }] }, { $set: { pendingBookings: waitBooks } }, { new: true })
-                    //await updatedBooks.save()
-                    const currSelectedBooking = await Booking.findOneAndUpdate({ _id: selectedBooking }, { $set: { isConfirmed: true } }, { new: true })
-                    //const currSelectedBooking=await Booking.findOne({_id:selectedBooking})
-                    //console.log("curr",currSelectedBooking)
-                    const selectedUser = await User.findById({ _id: currSelectedBooking.uid })
-                    sendConfirmMail(currSelectedBooking, selectedUser.email)
+                    console.log(waitBooks[0])
+                    let left_slots=parseInt(cancelledBooking.visitors)
+                    console.log(left_slots)
+                    let book_slots=parseInt(waitBooks[0].attendees)
+                    while(left_slots>=book_slots){
+                        left_slots-=waitBooks[0].attendees
+                        if(waitBooks.length>0){
+                            book_slots=parseInt(waitBooks[0].attendees)
+                        }else{
+                            book_slots=-1
+                        }
+                        const selectedBooking = waitBooks.shift()
+                        //  console.log(selectedBooking)
+                        console.log(waitBooks)
+                        const updatedBooks = await Waitlist.updateOne({ $and: [{ date: cancelledBooking.date }, { slot: cancelledBooking.slot }] }, { $set: { pendingBookings: waitBooks } }, { new: true })
+                        //await updatedBooks.save()
+                        const currSelectedBooking = await Booking.findOneAndUpdate({ _id: selectedBooking.bookings }, { $set: { isConfirmed: true } }, { new: true })
+                        //const currSelectedBooking=await Booking.findOne({_id:selectedBooking})
+                        //console.log("curr",currSelectedBooking)
+                        console.log(currSelectedBooking)
+                        const selectedUser = await User.findById({ _id: currSelectedBooking.uid })
+                        sendConfirmMail(currSelectedBooking, selectedUser.email)
+                    }
                 }
             }
             await Booking.deleteOne({ _id })

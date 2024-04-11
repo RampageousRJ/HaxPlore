@@ -43,7 +43,7 @@ const getRecords = async (req, res) => {   //http://localhost:3000/records/
 const storeRecord = async (req, res) => {
     try {
         const { bookingId, transactionId } = req.body;
-        const tx = await contractInstance.setRecord(bookingId.trim(), transactionId.trim());
+        const tx = await contractInstance.setRecord(bookingId, transactionId);
         await tx.wait();
         res.json({ success: true })
     }
