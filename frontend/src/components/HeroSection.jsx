@@ -8,8 +8,8 @@ function HeroSection(props) {
 
   const scrollIntoView=props.scrollIntoView
   return (
-    <main className=" bg-custom-gradient w-full h-screen relative overflow-hidden">
-      <div className="w-full flex justify-center absolute top-48">
+    <main className=" bg-custom-gradient-mobile md:bg-custom-gradient w-full h-unit-8xl md:h-screen relative overflow-hidden">
+      <div className="w-full flex justify-center absolute -bottom-24 md:top-48">
         <motion.img
           src={mandala}
           alt="mandala image"
@@ -24,13 +24,13 @@ function HeroSection(props) {
         />
       </div>
       <Navbar scrollIntoView={scrollIntoView} />
-      <div className="w-full h-2/3 flex">
-        <h2 className="text-4xl text-white m-auto">
+      <div className="w-full h-2/3 flex text-center">
+        <h2 className="text-xl md:text-4xl w-full text-white self-center">
           SHRI RAM JANMABHOOMI MANDIR, AYODHYA
         </h2>
       </div>
-      <div className="w-full flex justify-center absolute bottom-5">
-        <img src={mandir} alt="mandir image" className="w-2/3" />
+      <div className="w-full flex justify-center absolute bottom-1 md:bottom-5">
+        <img src={mandir} alt="mandir image" className="w-full md:w-2/3" />
       </div>
     </main>
   );

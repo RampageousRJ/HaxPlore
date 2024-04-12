@@ -240,7 +240,7 @@ function Booking() {
       </section>
       {/* Section to show availibilities */}
       <section
-        className="w-full flex justify-center items-center p-10 "
+        className="w-full flex xl:justify-center items-center p-10 "
         style={{ backgroundColor: "#F3F2F3" }}
       >
         <div className="bg-white text-sm">
