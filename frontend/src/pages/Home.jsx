@@ -27,7 +27,7 @@ function Home() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end end"],
   });
   // Custom mapping for a specific point, like the middle
   const customOpacity = useTransform(
