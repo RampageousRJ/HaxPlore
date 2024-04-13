@@ -85,7 +85,7 @@ function Bookings() {
     const data = await req.json();
     if (data.error) console.log(data.error);
     const req2 = await fetch(
-      `http://localhost:3000/api/security/get-transaction-record/${id}`,
+      `http://localhost:3000/api/booking/get-transaction-record/${id}`,
       {
         method: "GET",
         credentials: "include",

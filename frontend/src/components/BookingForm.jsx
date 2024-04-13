@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bookingDetailsUpdate } from "../features/bookingSlice.js";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function BookingForm() {
   const [formData, setFormData] = useState(null);
@@ -33,6 +34,8 @@ function BookingForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    if(formData.visitors < (formData.infants + formData.seniors))
+      return toast.error("No of total visitors less entered details")
     dispatch(bookingDetailsUpdate(formData));
     navigate("/booking")
   };

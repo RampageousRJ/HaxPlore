@@ -4,6 +4,7 @@ import Waitlist from '../models/waitlistModel.js';
 import { sendConfirmMail } from '../utils/sendConfirmationMail.js';
 import User from '../models/userModel.js';
 import { io } from '../socket/socket.js';
+import Transaction from '../models/transactionModel.js';
 //import io from '../index.js'
 
 
@@ -54,7 +55,7 @@ export const newBooking = async (req, res) => {
         const currentBooking = await Booking.findOneAndUpdate({ _id: newBooking._id }, { QRCode: QRCode }, { new: true })
         if (currentBooking) {
             await currentBooking.save();
-            io.emit("updatedBooking",currentBooking)
+            io.emit("updatedBooking", currentBooking)
             //socket send here
             if (!currentBooking.isConfirmed) {
                 const waitRecord = await Waitlist.findOne({ $and: [{ date: currentBooking.date }, { slot: currentBooking.slot }] })
@@ -62,11 +63,11 @@ export const newBooking = async (req, res) => {
                     const newWaitRec = await Waitlist.create({
                         date: currentBooking.date,
                         slot: currentBooking.slot,
-                        pendingBookings: [{bookings:currentBooking._id,attendees:currentBooking.visitors}]
+                        pendingBookings: [{ bookings: currentBooking._id, attendees: currentBooking.visitors }]
                     })
                 } else {
                     console.log(waitRecord.pendingBookings)
-                    waitRecord.pendingBookings.push({bookings:currentBooking._id,attendees:currentBooking.visitors})
+                    waitRecord.pendingBookings.push({ bookings: currentBooking._id, attendees: currentBooking.visitors })
                     console.log(waitRecord.pendingBookings)
                     waitRecord.pendingBookings.sort((dict1, dict2) => {
                         const sortKey1 = dict1.attendees;
@@ -113,15 +114,15 @@ export const removeBooking = async (req, res) => {
                 if (waitlist?.pendingBookings?.length > 0) {
                     const waitBooks = waitlist.pendingBookings
                     console.log(waitBooks[0])
-                    let left_slots=parseInt(cancelledBooking.visitors)
+                    let left_slots = parseInt(cancelledBooking.visitors)
                     console.log(left_slots)
-                    let book_slots=parseInt(waitBooks[0].attendees)
-                    while(left_slots>=book_slots){
-                        left_slots-=waitBooks[0].attendees
-                        if(waitBooks.length>0){
-                            book_slots=parseInt(waitBooks[0].attendees)
-                        }else{
-                            book_slots=-1
+                    let book_slots = parseInt(waitBooks[0].attendees)
+                    while (left_slots >= book_slots) {
+                        left_slots -= waitBooks[0].attendees
+                        if (waitBooks.length > 0) {
+                            book_slots = parseInt(waitBooks[0].attendees)
+                        } else {
+                            book_slots = -1
                         }
                         const selectedBooking = waitBooks.shift()
                         //  console.log(selectedBooking)
@@ -239,5 +240,38 @@ export const getBookedSlots = async (req, res) => {
     } catch (error) {
         console.log("Error in getBookedSlots:", error.message)
         res.status(500).json({ error: "Internal Server Error!!" })
+    }
+}
+
+export const storeTransactionId = async (req, res) => {
+    const { transactionId, bookingId } = req.body
+    try {
+        const booking = await Booking.findById(bookingId)
+        if (!booking) {
+            return res.status(404).json({ error: "Booking not found!!" })
+        }
+        const newTransaction=new Transaction({
+            transactionId,
+            bookingId
+        })
+        await newTransaction.save()
+        res.status(200).json({ success: "Transaction Id stored successfully!!" })
+    }
+    catch(e){
+        res.status(500).json({ error: "Internal Server Error!!" })
+    }
+}
+
+export const getTransactionId =async(req,res)=>{
+    const bookingId = req.params.id;
+    try{
+        const transaction = await Transaction.findOne({bookingId})
+        if(!transaction){
+            return res.status(404).json({error:"Transaction not found!!"})
+        }
+        res.status(200).json({transactionId:transaction.transactionId})
+    } 
+    catch(e){
+        res.status(404).json({error:"Internal Server Error!!"})
     }
 }

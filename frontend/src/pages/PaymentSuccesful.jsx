@@ -38,7 +38,7 @@ function PaymentSuccesful() {
     const transactionId = urlParams.get("session_id");
     const saveInBlockChain = async () => {
       console.log("Hello",bookingID,transactionId);
-      const req = await fetch(`http://localhost:3000/api/security/store-transaction-records`, {
+      const req = await fetch(`http://localhost:3000/api/booking/store-transaction-records`, {
         method: "POST",
         credentials: "include",
         headers: {
